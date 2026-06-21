@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import InstagramBubble from "./components/InstagramBubble";
+import BackToTop from "./components/BackToTop";
 import About from "./components/About";
 import Galeria from "./components/Galeria";
 import Locations from "./components/Locations";
@@ -14,6 +15,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <InstagramBubble />
+      <BackToTop />
       <About />
       <Galeria />
       <Locations />
