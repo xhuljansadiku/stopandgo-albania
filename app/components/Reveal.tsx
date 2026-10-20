@@ -4,9 +4,12 @@ import { useEffect, useRef, type ReactNode } from "react";
 
 export default function Reveal({
   className = "",
+  delay = 0,
   children,
 }: {
   className?: string;
+  /** Stagger offset in milliseconds. */
+  delay?: number;
   children: ReactNode;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -22,7 +25,7 @@ export default function Reveal({
           observer.unobserve(el);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
     );
 
     observer.observe(el);
@@ -30,7 +33,11 @@ export default function Reveal({
   }, []);
 
   return (
-    <div ref={ref} className={`reveal ${className}`}>
+    <div
+      ref={ref}
+      className={`reveal ${className}`}
+      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+    >
       {children}
     </div>
   );
