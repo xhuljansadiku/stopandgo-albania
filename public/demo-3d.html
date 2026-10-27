@@ -27,6 +27,7 @@
   h1,h2{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:.92;letter-spacing:.01em}
   h1{font-size:clamp(56px,13vw,180px)}
   h2{font-size:clamp(40px,8vw,96px)}
+  h1+p,h2+p{margin-top:24px}
   .eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
   p{color:#d8d4cc;line-height:1.6;margin-top:16px;font-size:17px;text-shadow:0 2px 12px #000}
   .r{color:var(--red);text-shadow:0 0 24px var(--red)} .g{color:var(--green);text-shadow:0 0 24px var(--green)} .a{color:var(--amber)}
@@ -57,13 +58,13 @@
     <div class="card">
       <div class="eyebrow">Stop &amp; Go · Albania · 24/7</div>
       <h1><span class="r">Ndalo.</span></h1>
-      <p>Natën vonë, rruga bosh. Një dritë e kuqe. Lëviz poshtë.</p>
+      <p class="lead">Çdo udhëtim ka nevojë për një pushim.</p>
     </div>
   </section>
   <section class="right" data-s>
     <div class="card">
       <h2><span class="a">Prit</span><br>pak…</h2>
-      <p>Kafe, minimarket dhe snack food — 24 orë në ditë, 7 ditë në javë.</p>
+      <p>Çlodhu.<br>Merr energji.</p>
     </div>
   </section>
   <section class="center" data-s>
@@ -75,9 +76,9 @@
   <section data-s style="min-height:300vh;align-items:flex-start;padding-top:40vh">
     <div class="card" style="position:sticky;top:20vh">
       <div class="eyebrow">01 · Kafe</div>
-      <h2>Espresso<br><span class="a">në 25 sekonda.</span></h2>
-      <p>Presion 9 bar, 25 sekonda — dhe krema që formohet para syve të tu. Kafe italiane e përgatitur me kujdes, nga espresso e shpejtë te cappuccino për t'u shijuar në tarracë.</p>
-      <ul><li>Espresso &amp; cappuccino</li><li>Take away</li><li>Tarracë e jashtme</li></ul>
+      <h2>Kafe që shijon<br><span class="a">çdo herë.</span></h2>
+      <p>Te Stop &amp; Go të pret Ama Caffè.<br>Nga espresso e preferuar te cappuccino i butë,<br>gati për çdo pushim.<br>Merre me vete ose ulu dhe shijoje pa nxitim.</p>
+      <ul><li>Ama Caffè</li><li>Take away</li><li>Ambient i jashtëm</li></ul>
     </div>
   </section>
   <section class="right" data-s>
@@ -100,16 +101,16 @@
       <div class="eyebrow">Gjithmonë afër teje</div>
       <h2>3 ndalesa.<br><span class="g">0 pushime.</span></h2>
       <div class="locs">
-        <a href="https://www.google.com/maps/dir/?api=1&destination=41.3275,19.8187">Lokacioni 1 · Tiranë <span>Hapur →</span></a>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=41.365,19.835">Lokacioni 2 · Rruga kombëtare <span>Hapur →</span></a>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=41.293,19.759">Lokacioni 3 · Minimarket i plotë <span>Hapur →</span></a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Kryebushat" target="_blank" rel="noopener">Stop&amp;Go · Kryebushat <span>Hapur →</span></a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Shkoder" target="_blank" rel="noopener">Stop&amp;Go · Shkodër <span>Hapur →</span></a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Muriqan" target="_blank" rel="noopener">Stop&amp;Go · Muriqan <span>Hapur →</span></a>
       </div>
     </div>
   </section>
   <section class="center" data-s style="min-height:180vh">
     <div class="card">
       <h2>Ndalesa jote e radhës<br><span class="r">të pret.</span></h2>
-      <a class="btn go" href="https://www.google.com/maps/dir/?api=1&destination=41.3275,19.8187">Gjej ndalesën më të afërt</a>
+      <a class="btn go" href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Albania" target="_blank" rel="noopener">Gjej ndalesën më të afërt</a>
       <p style="font-size:13px;color:var(--muted)">E hënë – E diel · 00:00 – 24:00</p>
     </div>
   </section>
@@ -225,8 +226,9 @@ function initScene() {
     const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
   }
   const neonMat = new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false, color: 0x000000 });
-  document.fonts.ready.then(() => { neonMat.map = neonTex('STOP & GO', '#ff3150'); neonMat.needsUpdate = true; });
-  const sign = new THREE.Mesh(new THREE.PlaneGeometry(10, 2.5), neonMat);
+  const texLoader = new THREE.TextureLoader();
+  texLoader.load('images/stopandgo-albania_logo.png', t => { t.colorSpace = THREE.SRGBColorSpace; neonMat.map = t; neonMat.needsUpdate = true; });
+  const sign = new THREE.Mesh(new THREE.PlaneGeometry(10, 4.53), neonMat); // logo aspect 733×332
   sign.position.set(0, 9, -62); scene.add(sign);
   const signLight = new THREE.PointLight(0xff3150, 0, 30, 1.5); signLight.position.set(0, 8, -59); scene.add(signLight);
 
@@ -255,6 +257,17 @@ function initScene() {
   cup.add(new THREE.Mesh(new THREE.LatheGeometry(prof, 64), ceramic));
   const handle = new THREE.Mesh(new THREE.TorusGeometry(0.22, 0.06, 12, 24, Math.PI * 1.2), ceramic);
   handle.position.set(0.74, 0.55, 0); handle.rotation.z = -Math.PI * 0.6; cup.add(handle);
+  // "ama" brand print: partial cylinder hugging the outer wall, facing the camera (+z)
+  const brandTex = (() => {
+    const c = document.createElement('canvas'); c.width = 512; c.height = 224; const g = c.getContext('2d');
+    g.textAlign = 'center'; g.fillStyle = '#d4111e';
+    g.font = 'italic 700 130px Georgia, serif'; g.fillText('ama', 256, 135);
+    g.fillStyle = '#2a1a12'; g.font = 'italic 34px Georgia, serif'; g.fillText('il mio amato caffè', 256, 195);
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+  })();
+  const brand = new THREE.Mesh(new THREE.CylinderGeometry(0.69, 0.65, 0.36, 48, 1, true, -0.65, 1.3),
+    new THREE.MeshPhysicalMaterial({ map: brandTex, transparent: true, roughness: 0.12, clearcoat: 1, depthWrite: false }));
+  brand.position.y = 0.56; cup.add(brand);
   const saucer = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.0, 0.08, 64), ceramic); saucer.position.y = -0.02; cup.add(saucer);
   // inner wall radius at height y (matches the lathe profile's inner edge)
   const innerR = y => 0.62 + 0.06 * (y - 0.15) / 0.85;
