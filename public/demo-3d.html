@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stop & Go — Drita Jeshile (demo 3D)</title>
+<meta name="description" content="Stop & Go Albania: kafe, minimarket dhe snack food, hapur 24/7. Demo 3D scrollytelling.">
+<meta property="og:title" content="Stop & Go — Ndalo. Shijo. Vazhdo.">
+<meta property="og:image" content="/images/storefront-1.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CafeOrCoffeeShop","name":"Stop & Go","openingHours":"Mo-Su 00:00-24:00","servesCuisine":"Coffee, Snacks","address":{"@type":"PostalAddress","addressLocality":"Tiranë","addressCountry":"AL"},"geo":{"@type":"GeoCoordinates","latitude":41.3275,"longitude":19.8187}}
+</script>
+<style>
+  :root{--bg:#07070a;--text:#f4f1ea;--muted:#a39f97;--red:#ff3150;--green:#3ddc5f;--amber:#f5c77e}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--bg)}
+  body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+  #gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+  .vignette{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.75))}
+  main{position:relative;z-index:2}
+  section{min-height:140vh;display:flex;align-items:center;padding:0 16px}
+  .card{max-width:520px;margin:0 auto 0 6vw;opacity:0;transform:translateY(40px)}
+  .right .card{margin:0 6vw 0 auto}
+  .center .card{margin:0 auto;text-align:center}
+  h1,h2{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:.92;letter-spacing:.01em}
+  h1{font-size:clamp(56px,13vw,180px)}
+  h2{font-size:clamp(40px,8vw,96px)}
+  .eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  p{color:#d8d4cc;line-height:1.6;margin-top:16px;font-size:17px;text-shadow:0 2px 12px #000}
+  .r{color:var(--red);text-shadow:0 0 24px var(--red)} .g{color:var(--green);text-shadow:0 0 24px var(--green)} .a{color:var(--amber)}
+  ul{list-style:none;margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+  li{border:1px solid #fff3;border-radius:99px;padding:6px 14px;font-size:14px;background:#0008;backdrop-filter:blur(6px)}
+  .btn{display:inline-block;margin-top:28px;padding:16px 28px;border-radius:99px;background:#e01f3d;color:#fff;text-decoration:none;font-weight:600;box-shadow:0 0 40px #ff315088}
+  .btn.go{background:#1f9e3d;box-shadow:0 0 40px #3ddc5f88}
+  .locs{display:grid;gap:10px;margin-top:20px}
+  .locs a{display:flex;justify-content:space-between;padding:14px 18px;border-radius:14px;border:1px solid #fff2;background:#0009;color:var(--text);text-decoration:none}
+  .locs a span{color:var(--green)}
+  .hud{position:fixed;left:16px;bottom:16px;z-index:3;font-size:11px;letter-spacing:.25em;color:var(--muted);text-transform:uppercase}
+  .bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--red),var(--amber),var(--green));z-index:3;width:0}
+  @media (max-width:700px){.card,.right .card{margin:0 auto}section{min-height:120vh}}
+  /* reduced motion / no WebGL: static poster */
+  .static #gl{display:none}
+  .static body{background:linear-gradient(#07070acc,#07070a),url(/images/storefront-1.jpg) center/cover fixed}
+  .static .card{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="vignette"></div>
+<div class="bar" id="bar"></div>
+<div class="hud" id="hud">Ora 02:14 · Rruga kombëtare</div>
+
+<main>
+  <section class="center" data-s>
+    <div class="card">
+      <div class="eyebrow">Stop &amp; Go · Albania · 24/7</div>
+      <h1><span class="r">Ndalo.</span></h1>
+      <p>Natën vonë, rruga bosh. Një dritë e kuqe. Lëviz poshtë.</p>
+    </div>
+  </section>
+  <section class="right" data-s>
+    <div class="card">
+      <h2><span class="a">Prit</span><br>pak…</h2>
+      <p>Kafe, minimarket dhe snack food — 24 orë në ditë, 7 ditë në javë.</p>
+    </div>
+  </section>
+  <section class="center" data-s>
+    <div class="card">
+      <h1><span class="g">Vazhdo.</span></h1>
+      <p>Drita është gjithmonë ndezur. Kalo kur të duash.</p>
+    </div>
+  </section>
+  <section data-s style="min-height:300vh;align-items:flex-start;padding-top:40vh">
+    <div class="card" style="position:sticky;top:20vh">
+      <div class="eyebrow">01 · Kafe</div>
+      <h2>Espresso<br><span class="a">në 25 sekonda.</span></h2>
+      <p>Presion 9 bar, 25 sekonda — dhe krema që formohet para syve të tu. Kafe italiane e përgatitur me kujdes, nga espresso e shpejtë te cappuccino për t'u shijuar në tarracë.</p>
+      <ul><li>Espresso &amp; cappuccino</li><li>Take away</li><li>Tarracë e jashtme</li></ul>
+    </div>
+  </section>
+  <section class="right" data-s>
+    <div class="card">
+      <div class="eyebrow">02 · Minimarket</div>
+      <h2>Gjithçka<br><span class="r">për rrugën.</span></h2>
+      <p>Produkte të përditshme dhe pije të ftohta, gati për çdo udhëtim — ditë apo natë.</p>
+      <ul><li>Pije të ftohta</li><li>Produkte të përditshme</li><li>Snack me vetëshërbim</li></ul>
+    </div>
+  </section>
+  <section data-s>
+    <div class="card">
+      <div class="eyebrow">Fjala e klientëve</div>
+      <h2>“Kafja më e mirë<br><span class="g">në zonë.”</span></h2>
+      <p>Stafi shumë i sjellshëm dhe gjithmonë i hapur, edhe vonë natën. — Banor i zonës ★★★★★</p>
+    </div>
+  </section>
+  <section class="center" data-s>
+    <div class="card">
+      <div class="eyebrow">Gjithmonë afër teje</div>
+      <h2>3 ndalesa.<br><span class="g">0 pushime.</span></h2>
+      <div class="locs">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=41.3275,19.8187">Lokacioni 1 · Tiranë <span>Hapur →</span></a>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=41.365,19.835">Lokacioni 2 · Rruga kombëtare <span>Hapur →</span></a>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=41.293,19.759">Lokacioni 3 · Minimarket i plotë <span>Hapur →</span></a>
+      </div>
+    </div>
+  </section>
+  <section class="center" data-s style="min-height:180vh">
+    <div class="card">
+      <h2>Ndalesa jote e radhës<br><span class="r">të pret.</span></h2>
+      <a class="btn go" href="https://www.google.com/maps/dir/?api=1&destination=41.3275,19.8187">Gjej ndalesën më të afërt</a>
+      <p style="font-size:13px;color:var(--muted)">E hënë – E diel · 00:00 – 24:00</p>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+gsap.registerPlugin(ScrollTrigger);
+
+// Text cards fade in per section (also runs in static mode)
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canvas = document.getElementById('gl');
+const hasGL = !!canvas.getContext('webgl2');
+if (reduced || !hasGL) document.documentElement.classList.add('static');
+
+if (!reduced) {
+  const lenis = new Lenis({ lerp: 0.08 });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+  document.querySelectorAll('[data-s] .card').forEach(c =>
+    gsap.to(c, { opacity: 1, y: 0, ease: 'none',
+      scrollTrigger: { trigger: c, start: 'top 85%', end: 'top 45%', scrub: true } }));
+}
+
+if (!reduced && hasGL) initScene();
+
+function initScene() {
+  // Adaptive quality: cheap heuristic in place of a GPU tier lib
+  const low = innerWidth < 700 || (navigator.hardwareConcurrency || 4) <= 4;
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !low, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, low ? 1.25 : 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.1;
+  renderer.shadowMap.enabled = !low;
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x05050a);
+  scene.fog = new THREE.FogExp2(0x07070d, 0.028);
+  const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 400);
+
+  scene.add(new THREE.HemisphereLight(0x3a4466, 0x0a0a0a, 0.35));
+  const moon = new THREE.DirectionalLight(0x8899ff, 0.4);
+  moon.position.set(-20, 30, 10); scene.add(moon);
+
+  // ---------- Road: asphalt with procedural grain + dashed lane ----------
+  const asphaltTex = (() => {
+    const c = document.createElement('canvas'); c.width = c.height = 512;
+    const g = c.getContext('2d'); g.fillStyle = '#1a1a1d'; g.fillRect(0, 0, 512, 512);
+    for (let i = 0; i < 18000; i++) { const v = 20 + Math.random() * 40; g.fillStyle = `rgb(${v},${v},${v + 3})`; g.fillRect(Math.random() * 512, Math.random() * 512, 1.5, 1.5); }
+    const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(4, 60); t.colorSpace = THREE.SRGBColorSpace; return t;
+  })();
+  const road = new THREE.Mesh(new THREE.PlaneGeometry(14, 420),
+    new THREE.MeshStandardMaterial({ map: asphaltTex, roughness: 0.55, metalness: 0.1 })); // slightly wet = low roughness
+  road.rotation.x = -Math.PI / 2; road.position.z = -160; road.receiveShadow = true; scene.add(road);
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 420), new THREE.MeshStandardMaterial({ color: 0x0b0d0b, roughness: 1 }));
+  ground.rotation.x = -Math.PI / 2; ground.position.set(0, -0.02, -160); scene.add(ground);
+  const dashMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0x444444 });
+  for (let z = 0; z > -330; z -= 6) {
+    const d = new THREE.Mesh(new THREE.PlaneGeometry(0.18, 2.6), dashMat);
+    d.rotation.x = -Math.PI / 2; d.position.set(0, 0.01, z); scene.add(d);
+  }
+
+  // ---------- Street lamps: switched on in a wave at the "GO" moment ----------
+  const lamps = [];
+  const poleMat = new THREE.MeshStandardMaterial({ color: 0x2a2a2e, metalness: 0.8, roughness: 0.4 });
+  for (let i = 0; i < 14; i++) {
+    const side = i % 2 ? 1 : -1, z = -14 - i * 18;
+    const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.12, 7, 8), poleMat);
+    pole.position.set(side * 8, 3.5, z); scene.add(pole);
+    const bulbMat = new THREE.MeshStandardMaterial({ color: 0x111111, emissive: 0xffb866, emissiveIntensity: 0 });
+    const bulb = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.15, 0.4), bulbMat);
+    bulb.position.set(side * 7.4, 7, z); scene.add(bulb);
+    const light = new THREE.PointLight(0xffb070, 0, 22, 1.6);
+    light.position.set(side * 6.5, 6.6, z); scene.add(light);
+    lamps.push({ bulbMat, light, z });
+  }
+
+  // ---------- Traffic light ----------
+  const tl = new THREE.Group(); tl.position.set(3.2, 0, -16);
+  const tlPole = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 5, 8), poleMat);
+  tlPole.position.y = 2.5; tl.add(tlPole);
+  const housing = new THREE.Mesh(new THREE.BoxGeometry(0.8, 2.2, 0.6), new THREE.MeshStandardMaterial({ color: 0x111114, roughness: 0.6 }));
+  housing.position.y = 5.8; tl.add(housing);
+  const lampCols = [0xff3150, 0xf5c77e, 0x3ddc5f];
+  const tLights = lampCols.map((col, i) => {
+    const m = new THREE.MeshStandardMaterial({ color: 0x0a0a0a, emissive: col, emissiveIntensity: 0 });
+    const s = new THREE.Mesh(new THREE.CircleGeometry(0.24, 32), m);
+    s.position.set(0, 6.5 - i * 0.68, 0.31); tl.add(s);
+    const pl = new THREE.PointLight(col, 0, 14, 2); pl.position.set(0, 6.5 - i * 0.68, 1.2); tl.add(pl);
+    return { m, pl };
+  });
+  scene.add(tl);
+
+  // ---------- Neon sign (canvas text → emissive plane, bloom does the glow) ----------
+  function neonTex(text, color, w = 1024, h = 256, font = 150) {
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const g = c.getContext('2d'); g.font = `${font}px Anton, Impact, sans-serif`;
+    g.textAlign = 'center'; g.textBaseline = 'middle'; g.shadowColor = color; g.shadowBlur = 30;
+    g.fillStyle = color; g.fillText(text, w / 2, h / 2); g.fillText(text, w / 2, h / 2);
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+  }
+  const neonMat = new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false, color: 0x000000 });
+  document.fonts.ready.then(() => { neonMat.map = neonTex('STOP & GO', '#ff3150'); neonMat.needsUpdate = true; });
+  const sign = new THREE.Mesh(new THREE.PlaneGeometry(10, 2.5), neonMat);
+  sign.position.set(0, 9, -62); scene.add(sign);
+  const signLight = new THREE.PointLight(0xff3150, 0, 30, 1.5); signLight.position.set(0, 8, -59); scene.add(signLight);
+
+  // ---------- The store: box with lit glass front ----------
+  const store = new THREE.Group(); store.position.set(0, 0, -68);
+  const wall = new THREE.Mesh(new THREE.BoxGeometry(18, 6.5, 8), new THREE.MeshStandardMaterial({ color: 0x1a1a1f, roughness: 0.8 }));
+  wall.position.y = 3.25; store.add(wall);
+  const glass = new THREE.Mesh(new THREE.PlaneGeometry(14, 4.2), new THREE.MeshStandardMaterial({ color: 0x111, emissive: 0xfff1d6, emissiveIntensity: 0 }));
+  glass.position.set(0, 2.3, 4.01); store.add(glass);
+  const canopy = new THREE.Mesh(new THREE.BoxGeometry(20, 0.3, 4), new THREE.MeshStandardMaterial({ color: 0x0d0d10 }));
+  canopy.position.set(0, 5, 5.5); store.add(canopy);
+  const stripe = new THREE.Mesh(new THREE.BoxGeometry(20, 0.08, 0.05), new THREE.MeshBasicMaterial({ color: 0x3ddc5f, toneMapped: false }));
+  stripe.position.set(0, 4.85, 7.5); store.add(stripe);
+  const storeLight = new THREE.PointLight(0xfff1d6, 0, 26, 1.4); storeLight.position.set(0, 3, 9); store.add(storeLight);
+  scene.add(store);
+  // the road bends: store sits at road end, so move road-follow camera sideways around it
+  // (camera path handles this — see curve below)
+
+  // ---------- Espresso scene: machine group head, portafilter, cup that fills on scroll ----------
+  // All in cup-local units (cup group scaled 1.6). Rim at y=1.0, spouts at y=SPOUT_Y.
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture; // reflections for chrome/ceramic only
+  const cup = new THREE.Group(); cup.position.set(-3, 1.2, -100);
+  const prof = [[0, 0], [0.55, 0], [0.62, 0.08], [0.7, 0.9], [0.74, 1.0], [0.68, 1.0], [0.62, 0.15], [0, 0.12]].map(p => new THREE.Vector2(p[0], p[1]));
+  const ceramic = new THREE.MeshPhysicalMaterial({ color: 0xf4f1ea, roughness: 0.12, clearcoat: 1, clearcoatRoughness: 0.04, envMap: envTex, envMapIntensity: 0.6 });
+  cup.add(new THREE.Mesh(new THREE.LatheGeometry(prof, 64), ceramic));
+  const handle = new THREE.Mesh(new THREE.TorusGeometry(0.22, 0.06, 12, 24, Math.PI * 1.2), ceramic);
+  handle.position.set(0.74, 0.55, 0); handle.rotation.z = -Math.PI * 0.6; cup.add(handle);
+  const saucer = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.0, 0.08, 64), ceramic); saucer.position.y = -0.02; cup.add(saucer);
+  // inner wall radius at height y (matches the lathe profile's inner edge)
+  const innerR = y => 0.62 + 0.06 * (y - 0.15) / 0.85;
+
+  // Crema texture: hazelnut centre, darker rim, tiger flecks
+  const cremaTex = (() => {
+    const c = document.createElement('canvas'); c.width = c.height = 512; const g = c.getContext('2d');
+    const gr = g.createRadialGradient(256, 256, 10, 256, 256, 256);
+    gr.addColorStop(0, '#d9a066'); gr.addColorStop(0.55, '#b8773f'); gr.addColorStop(0.9, '#7a4220'); gr.addColorStop(1, '#4a2410');
+    g.fillStyle = gr; g.fillRect(0, 0, 512, 512);
+    for (let i = 0; i < 2500; i++) {
+      const a = Math.random() * Math.PI * 2, r = Math.random() * 250;
+      g.fillStyle = Math.random() > 0.5 ? 'rgba(80,35,10,.35)' : 'rgba(240,200,150,.25)';
+      g.beginPath(); g.ellipse(256 + Math.cos(a) * r, 256 + Math.sin(a) * r, 1 + Math.random() * 3, 0.6, a, 0, 7); g.fill();
+    }
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.center.set(0.5, 0.5); return t;
+  })();
+  const liquidMat = new THREE.MeshPhysicalMaterial({ map: cremaTex, color: 0x2a1408, roughness: 0.35, clearcoat: 0.8, clearcoatRoughness: 0.2 });
+  const liquid = new THREE.Mesh(new THREE.CircleGeometry(1, 64), liquidMat);
+  liquid.rotation.x = -Math.PI / 2; liquid.visible = false; cup.add(liquid);
+
+  // Machine: chrome group head + brushed body above, drip tray below
+  const chrome = new THREE.MeshPhysicalMaterial({ color: 0xdddddd, metalness: 1, roughness: 0.12, envMap: envTex, envMapIntensity: 1.2 });
+  const brushed = new THREE.MeshPhysicalMaterial({ color: 0xaaaaaa, metalness: 1, roughness: 0.35, envMap: envTex });
+  const blackMat = new THREE.MeshStandardMaterial({ color: 0x0c0c0e, roughness: 0.45, metalness: 0.3, envMap: envTex, envMapIntensity: 0.4 });
+  const SPOUT_Y = 2.15;
+  const machine = new THREE.Group(); cup.add(machine);
+  const body = new THREE.Mesh(new THREE.BoxGeometry(4.5, 1.6, 2.6), brushed); body.position.set(0, 4.1, -0.6); machine.add(body);
+  const head = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.8, 0.6, 48), chrome); head.position.y = 3.05; machine.add(head);
+  const basket = new THREE.Mesh(new THREE.CylinderGeometry(0.66, 0.55, 0.35, 48), chrome); basket.position.y = 2.6; machine.add(basket);
+  const pfArm = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 1.2, 16), chrome); pfArm.rotation.z = Math.PI / 2; pfArm.position.set(1.15, 2.6, 0); machine.add(pfArm);
+  const pfHandle = new THREE.Mesh(new THREE.CapsuleGeometry(0.17, 1.3, 8, 16), blackMat); pfHandle.rotation.z = Math.PI / 2; pfHandle.position.set(2.4, 2.6, 0); machine.add(pfHandle);
+  const spouts = [-0.18, 0.18].map(x => {
+    const s = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.05, 0.3, 16), chrome); s.position.set(x, SPOUT_Y + 0.15, 0); machine.add(s); return x;
+  });
+  const tray = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.12, 2.4), blackMat); tray.position.y = -0.13; machine.add(tray);
+  for (let i = -6; i <= 6; i++) { const b = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.02, 2.2), chrome); b.position.set(i * 0.24, -0.06, 0); machine.add(b); }
+
+  // Streams: thin tubes with a scrolling "tiger stripe" texture
+  const streamTex = (() => {
+    const c = document.createElement('canvas'); c.width = 16; c.height = 256; const g = c.getContext('2d');
+    for (let y = 0; y < 256; y++) { const v = Math.random(); g.fillStyle = v > 0.7 ? '#c88a4a' : v > 0.35 ? '#7a3f18' : '#3a1a08'; g.fillRect(0, y, 16, 1 + Math.random() * 3); }
+    const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(1, 3); t.colorSpace = THREE.SRGBColorSpace; return t;
+  })();
+  const streamMat = new THREE.MeshPhysicalMaterial({ map: streamTex, roughness: 0.15, clearcoat: 1, transparent: true, opacity: 0.95, envMap: envTex, envMapIntensity: 0.5 });
+  const streams = spouts.map(x => {
+    const geo = new THREE.CylinderGeometry(1, 1, 1, 12, 1, true); geo.translate(0, -0.5, 0); // pivot at the top = spout
+    const m = new THREE.Mesh(geo, streamMat); m.position.set(x, SPOUT_Y, 0); m.visible = false; cup.add(m); return m;
+  });
+  // single falling drops for the start and the tail end of the shot
+  const drops = spouts.map(x => {
+    const d = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 8), streamMat); d.scale.y = 1.6; d.position.set(x, SPOUT_Y, 0); d.visible = false; cup.add(d); return d;
+  });
+  // splash droplets at the impact points
+  const SPL = 60, splGeo = new THREE.BufferGeometry(), splP = new Float32Array(SPL * 3), splSeed = new Float32Array(SPL);
+  for (let i = 0; i < SPL; i++) splSeed[i] = Math.random();
+  splGeo.setAttribute('position', new THREE.BufferAttribute(splP, 3));
+  const splash = new THREE.Points(splGeo, new THREE.PointsMaterial({ color: 0x8a4a20, size: 0.035, transparent: true, opacity: 0 }));
+  cup.add(splash);
+
+  cup.scale.setScalar(1.6); scene.add(cup);
+  const cupLight = new THREE.SpotLight(0xffd9a0, 60, 20, 0.5, 0.6, 1.5); cupLight.position.set(-1, 9, -95); cupLight.target = cup; scene.add(cupLight, cupLight.target);
+  const backLight = new THREE.PointLight(0xffa860, 25, 8, 2); backLight.position.set(-3, 3.5, -103); scene.add(backLight); // rim-lights the streams
+
+  const STEAM = low ? 120 : 300;
+  const steamGeo = new THREE.BufferGeometry();
+  const sp = new Float32Array(STEAM * 3), sSeed = new Float32Array(STEAM);
+  for (let i = 0; i < STEAM; i++) sSeed[i] = Math.random();
+  steamGeo.setAttribute('position', new THREE.BufferAttribute(sp, 3));
+  const steam = new THREE.Points(steamGeo, new THREE.PointsMaterial({ size: 0.25, color: 0xffffff, transparent: true, opacity: 0.18, depthWrite: false }));
+  scene.add(steam);
+
+  // ---------- Mini-market: floating products (cans + boxes) ----------
+  const products = [];
+  const cols = [0xff3150, 0x3ddc5f, 0xf5c77e, 0x4aa8ff, 0xffffff];
+  for (let i = 0; i < 26; i++) {
+    const isCan = i % 2;
+    const geo = isCan ? new THREE.CylinderGeometry(0.33, 0.33, 1.1, 24) : new THREE.BoxGeometry(0.8, 1.1, 0.4);
+    const m = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: cols[i % 5], metalness: isCan ? 0.9 : 0.1, roughness: isCan ? 0.25 : 0.6 }));
+    const home = new THREE.Vector3(2 + Math.random() * 5, 1 + Math.random() * 5, -128 - Math.random() * 14);
+    m.position.copy(home); m.rotation.set(Math.random() * 6, Math.random() * 6, 0);
+    m.userData = { home, spin: 0.2 + Math.random() * 0.6 }; scene.add(m); products.push(m);
+  }
+  const mmLight = new THREE.PointLight(0xffffff, 30, 25, 1.5); mmLight.position.set(4, 6, -128); scene.add(mmLight);
+
+  // ---------- Location pins ----------
+  const pins = [];
+  [[-4, -175], [0, -182], [4, -175]].forEach(([x, z]) => {
+    const g = new THREE.Group();
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.7, 24, 16), new THREE.MeshBasicMaterial({ color: 0x3ddc5f, toneMapped: false }));
+    head.position.y = 3; g.add(head);
+    const tip = new THREE.Mesh(new THREE.ConeGeometry(0.5, 1.6, 24), head.material); tip.rotation.x = Math.PI; tip.position.y = 1.9; g.add(tip);
+    const ring = new THREE.Mesh(new THREE.RingGeometry(0.8, 1, 48), new THREE.MeshBasicMaterial({ color: 0x3ddc5f, transparent: true, toneMapped: false }));
+    ring.rotation.x = -Math.PI / 2; ring.position.y = 0.02; g.add(ring);
+    g.position.set(x, 0, z); g.scale.setScalar(0.001); scene.add(g); pins.push({ g, ring });
+  });
+
+  // ---------- Final logo: letters fly in from scattered positions ----------
+  const finalMat = new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false });
+  document.fonts.ready.then(() => { finalMat.map = neonTex('STOP & GO', '#3ddc5f'); finalMat.needsUpdate = true; });
+  const pieces = [];
+  const N = 12; // slice the sign into vertical strips
+  for (let i = 0; i < N; i++) {
+    const geo = new THREE.PlaneGeometry(12 / N, 3);
+    const uv = geo.attributes.uv; for (let k = 0; k < uv.count; k++) uv.setX(k, (i + uv.getX(k)) / N);
+    const m = new THREE.Mesh(geo, finalMat);
+    const target = new THREE.Vector3(-6 + (i + 0.5) * 12 / N, 5, -205);
+    const from = new THREE.Vector3((Math.random() - 0.5) * 40, Math.random() * 20 - 4, -205 - Math.random() * 30);
+    m.userData = { target, from, rot: (Math.random() - 0.5) * 6 }; scene.add(m); pieces.push(m);
+  }
+
+  // ---------- Rain (adds wet-night realism) ----------
+  const RAIN = low ? 600 : 1800;
+  const rg = new THREE.BufferGeometry(), rp = new Float32Array(RAIN * 3);
+  for (let i = 0; i < RAIN; i++) { rp[i * 3] = (Math.random() - 0.5) * 40; rp[i * 3 + 1] = Math.random() * 20; rp[i * 3 + 2] = (Math.random() - 0.5) * 40; }
+  rg.setAttribute('position', new THREE.BufferAttribute(rp, 3));
+  const rain = new THREE.Points(rg, new THREE.PointsMaterial({ color: 0x8899bb, size: 0.05, transparent: true, opacity: 0.5 }));
+  scene.add(rain);
+
+  // ---------- Postprocessing ----------
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), low ? 0.7 : 0.9, 0.6, 0.6);
+  composer.addPass(bloom);
+  composer.addPass(new OutputPass());
+
+  // ---------- Camera path: keyframes along the drive ----------
+  // [scroll progress, camera pos, look-at]
+  const K = [
+    [0.00, [0, 1.6, 6], [3, 4, -16]],      // stopped at the red light
+    [0.22, [0, 1.6, 2], [3, 5.5, -16]],
+    [0.32, [0, 2.2, -30], [0, 7, -62]],     // GO: drive to the neon sign
+    [0.42, [-6, 2.5, -52], [0, 4, -68]],    // swing around the store
+    [0.48, [0.5, 3.6, -92], [-3, 3.2, -100]],     // arrive at the espresso machine
+    [0.55, [-0.6, 2.6, -94.5], [-3, 2.6, -100]],  // macro: streams into the cup
+    [0.62, [-2, 4.4, -96.5], [-3, 2.2, -100]],    // look down at the crema
+    [0.70, [0, 3, -118], [4, 3, -132]],           // mini-market products
+    [0.78, [0, 4, -150], [0, 3, -165]],
+    [0.88, [0, 9, -160], [0, 0, -178]],     // pins from above
+    [1.00, [0, 5, -186], [0, 5, -205]],     // logo reassembled
+  ];
+  const v3 = a => new THREE.Vector3(...a);
+  const posCurve = new THREE.CatmullRomCurve3(K.map(k => v3(k[1])));
+  const lookCurve = new THREE.CatmullRomCurve3(K.map(k => v3(k[2])));
+  // Map global progress → curve parameter so keyframes land at their scroll %
+  function curveT(p) {
+    for (let i = 0; i < K.length - 1; i++) if (p <= K[i + 1][0]) {
+      const f = (p - K[i][0]) / (K[i + 1][0] - K[i][0]);
+      return (i + f) / (K.length - 1);
+    }
+    return 1;
+  }
+
+  const state = { p: 0 };
+  ScrollTrigger.create({ start: 0, end: 'max', onUpdate: s => { state.p = s.progress; } });
+  const bar = document.getElementById('bar'), hud = document.getElementById('hud');
+
+  const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+  const look = new THREE.Vector3(); let sp_ = 0; let running = true;
+  document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) tick(); });
+
+  function resize() {
+    const w = innerWidth, h = innerHeight;
+    renderer.setSize(w, h, false); composer.setSize(w, h); camera.aspect = w / h;
+    camera.fov = w < h ? 70 : 55; camera.updateProjectionMatrix();
+  }
+  addEventListener('resize', resize); resize();
+
+  const clock = new THREE.Clock();
+  function tick() {
+    if (!running) return;
+    const t = clock.getElapsedTime();
+    sp_ += (state.p - sp_) * 0.08; // extra damping → weighted camera
+    const p = sp_;
+    bar.style.width = p * 100 + '%';
+
+    const ct = curveT(p);
+    camera.position.copy(posCurve.getPoint(ct));
+    camera.position.x += Math.sin(t * 0.4) * 0.08; camera.position.y += Math.sin(t * 0.6) * 0.05; // handheld drift
+    lookCurve.getPoint(ct, look); camera.lookAt(look);
+
+    // Traffic light: red → amber → green
+    const red = 1 - smooth(0.14, 0.16, p), amber = smooth(0.12, 0.15, p) * (1 - smooth(0.2, 0.22, p)), green = smooth(0.2, 0.22, p);
+    [red, amber, green].forEach((v, i) => { tLights[i].m.emissiveIntensity = v * 4; tLights[i].pl.intensity = v * 12; });
+
+    // WOW: on GREEN, lamps ignite in a wave down the road, then the neon sign flickers on
+    lamps.forEach((l, i) => {
+      const on = smooth(0.21 + i * 0.008, 0.23 + i * 0.008, p);
+      l.bulbMat.emissiveIntensity = on * 3; l.light.intensity = on * 25;
+    });
+    const neonOn = smooth(0.26, 0.3, p);
+    const flicker = neonOn < 1 && neonOn > 0 ? (Math.random() > 0.5 ? 1 : 0.1) : 1;
+    neonMat.color.setScalar(neonOn * flicker * 2.2); signLight.intensity = neonOn * flicker * 40;
+    glass.material.emissiveIntensity = smooth(0.3, 0.36, p) * 1.4; storeLight.intensity = smooth(0.3, 0.36, p) * 30;
+    hud.textContent = p < 0.2 ? 'Ora 02:14 · Drita e kuqe' : p < 0.5 ? 'Ora 02:15 · Stop & Go — Hapur' : p < 0.85 ? 'Ora 02:21 · Rruga kombëtare' : 'Ora 02:30 · Hapur 24/7';
+
+    // ---- Espresso shot on scroll: first drops → twin streams → crema lightens → tail drips → steam ----
+    const P0 = 0.47, P1 = 0.49, P2 = 0.6, P3 = 0.62;
+    const fill = smooth(P1, P3, p);                       // 0→1 cup fill
+    const level = 0.15 + fill * 0.68;                     // liquid surface height (local)
+    const flow = smooth(P1, P1 + 0.012, p) * (1 - smooth(P2, P2 + 0.012, p));
+    liquid.visible = p > P1 - 0.003;
+    liquid.position.y = level + Math.sin(t * 40) * 0.003 * flow; // surface trembles under the pour
+    liquid.scale.setScalar(innerR(level) - 0.005);
+    // early espresso is dark; crema forms and lightens as the shot goes on
+    liquidMat.color.lerpColors(new THREE.Color(0x2a1408), new THREE.Color(0xffffff), smooth(P1 + 0.02, P3, p));
+    cremaTex.rotation = t * 0.05 + p * 4;                 // slow swirl
+    streams.forEach((s, i) => {
+      s.visible = flow > 0.02;
+      // thin laminar stream with a slight wobble; it thins out as the shot ends
+      const w = 0.028 * flow;
+      s.scale.set(w + 0.004 * Math.sin(t * 30 + i), SPOUT_Y - level, w + 0.004 * Math.cos(t * 27 + i));
+      s.rotation.z = Math.sin(t * 3 + i) * 0.01;
+    });
+    streamTex.offset.y = t * 2.5;                         // liquid moving down
+    const dripping = (p > P0 && p < P1) || (p > P2 && p < P3 + 0.02);
+    drops.forEach((d, i) => {
+      const ph = (t * 1.3 + i * 0.37) % 1;
+      d.visible = dripping;
+      d.position.y = SPOUT_Y - ph * ph * (SPOUT_Y - level); // accelerating fall
+    });
+    splash.material.opacity = flow * 0.9;
+    for (let i = 0; i < SPL; i++) {
+      const life = (t * 2.2 + splSeed[i]) % 1, a = splSeed[i] * 40;
+      splP[i * 3] = spouts[i % 2] + Math.cos(a) * life * 0.18;
+      splP[i * 3 + 1] = level + Math.sin(life * Math.PI) * 0.08;
+      splP[i * 3 + 2] = Math.sin(a) * life * 0.18;
+    }
+    splGeo.attributes.position.needsUpdate = true;
+
+    // Steam once the cup is full and hot
+    const steamOn = smooth(P2, P3 + 0.03, p);
+    for (let i = 0; i < STEAM; i++) {
+      const life = (t * 0.25 + sSeed[i]) % 1;
+      sp[i * 3] = -3 + Math.sin(life * 6 + sSeed[i] * 20) * 0.3 * life + (sSeed[i] - 0.5) * 0.8;
+      sp[i * 3 + 1] = 2.6 + life * 3;
+      sp[i * 3 + 2] = -99.4 + Math.cos(life * 5 + sSeed[i] * 9) * 0.3 * life;
+    }
+    steamGeo.attributes.position.needsUpdate = true; steam.material.opacity = 0.18 * steamOn;
+
+    // Products: scattered → snap onto a shelf grid as you scroll through
+    const shelf = smooth(0.6, 0.7, p);
+    products.forEach((m, i) => {
+      const tx = 1.5 + (i % 7) * 1.0, ty = 0.8 + Math.floor(i / 7) * 1.4, tz = -134;
+      m.position.set(
+        THREE.MathUtils.lerp(m.userData.home.x, tx, shelf),
+        THREE.MathUtils.lerp(m.userData.home.y + Math.sin(t + i) * 0.2, ty, shelf),
+        THREE.MathUtils.lerp(m.userData.home.z, tz, shelf));
+      m.rotation.x = (1 - shelf) * (t * m.userData.spin + i); m.rotation.y = (1 - shelf) * (t * m.userData.spin);
+    });
+
+    // Pins pop up one by one
+    pins.forEach((pn, i) => {
+      const s = smooth(0.78 + i * 0.025, 0.82 + i * 0.025, p);
+      pn.g.scale.setScalar(Math.max(0.001, s)); pn.g.children[0].position.y = 3 + Math.sin(t * 2 + i) * 0.2;
+      const r = (t * 0.6 + i * 0.3) % 1; pn.ring.scale.setScalar(1 + r * 3); pn.ring.material.opacity = 1 - r;
+    });
+
+    // Logo reassembly
+    const asm = smooth(0.86, 0.99, p);
+    pieces.forEach(m => {
+      m.position.lerpVectors(m.userData.from, m.userData.target, asm);
+      m.rotation.z = m.userData.rot * (1 - asm); m.rotation.y = m.userData.rot * (1 - asm) * 0.5;
+    });
+    finalMat.opacity = 0.2 + asm * 0.8;
+
+    // Rain follows the camera
+    for (let i = 0; i < RAIN; i++) {
+      let y = rp[i * 3 + 1] - 0.35; if (y < 0) y += 20; rp[i * 3 + 1] = y;
+    }
+    rg.attributes.position.needsUpdate = true; rain.position.set(camera.position.x, 0, camera.position.z - 10);
+
+    composer.render();
+    requestAnimationFrame(tick);
+  }
+  tick();
+}
+</script>
+</body>
+</html>
