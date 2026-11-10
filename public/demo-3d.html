@@ -46,6 +46,8 @@
   .rv-btn:hover{border-color:#fff8}
   .rv-btn.go{background:#1f9e3d;border-color:#1f9e3d;box-shadow:0 0 24px #3ddc5f55}
   .rv-btn.go:hover{box-shadow:0 0 36px #3ddc5f99}
+  .rv-lbl{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .rv-locs{display:flex;flex-wrap:wrap;gap:8px}
   /* Desktop: reviews flank the road — odd ones left, even ones right, empty lane in the middle */
   @media (min-width:701px){
     .rv-sec .card{max-width:1500px;width:100%;margin:0 auto;padding:0 3vw;text-align:center}
@@ -101,7 +103,8 @@
     li{font-size:13px;padding:6px 12px}
     .rv-stars{width:100%;flex-direction:row;align-items:center;gap:10px}
     .rv-stars small{margin-top:0}
-    .rv-btn{flex:1;text-align:center}
+    .rv-lbl,.rv-locs{width:100%}
+    .rv-btn{flex:1;text-align:center;padding:10px 6px}
     .hud{display:none}
     h1,h2{line-height:1.14}
     .m-br{display:inline}
@@ -262,21 +265,25 @@
         <blockquote>“Great coffee! Really nice people working here.”<cite>Almir C. <b>★★★★★</b></cite></blockquote>
         <blockquote>“Perfect place to stop for coffee etc during your trip and you can pay in euros.”<cite>Dimitris D. <b>★★★★★</b></cite></blockquote>
         <blockquote>“Perfect place to rest during a long trip.<br class="d-br"> Very reasonable prices and very clean environment.”<cite>Xhulio K. <b>★★★★★</b></cite></blockquote>
-        <blockquote>“Perfect spots for a quick coffee break.<br class="d-br"> The place is clean and welcoming, and the waitress is very friendly.”<cite>Christophe R. · <span data-i18n="rv.tr">përkthyer nga frëngjishtja</span> <b>★★★★★</b></cite></blockquote>
+        <blockquote>“Perfect spots for a quick coffee break.<br class="d-br"> The place is clean and welcoming, and the waitress is very friendly.”<cite><span>Christophe R. · <span data-i18n="rv.tr">përkthyer nga frëngjishtja</span></span> <b>★★★★★</b></cite></blockquote>
         <blockquote>“Everything you need to rest and recharge with energy!”<cite>Robert C. <b>★★★★★</b></cite></blockquote>
         <blockquote>“Everything is perfect.<br class="d-br"> Staff is very kind and helpful if you ask for any trip or road advice.<br class="d-br"> Food is perfect and it's a very clean coffee shop.<br class="d-br"> Worth to try it.”<cite>The Old Man <b>★★★★★</b></cite></blockquote>
       </div>
       <div class="rv-cta">
         <span class="rv-stars">★★★★★<small>Google Maps</small></span>
-        <a class="rv-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Kryebushat" target="_blank" rel="noopener" data-i18n="rv.all">Shiko të gjitha ↗</a>
-        <a class="rv-btn go" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Kryebushat" target="_blank" rel="noopener" data-i18n="rv.leave">Lër vlerësim</a>
+        <span class="rv-lbl" data-i18n="rv.leave">Lër një vlerësim</span>
+        <div class="rv-locs">
+          <a class="rv-btn go" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Kryebushat" target="_blank" rel="noopener">Kryebushat</a>
+          <a class="rv-btn go" href="https://www.google.com/maps/place/Stop%26Go+Shkoder/@42.0750554,19.5238237,837m/data=!3m2!1e3!4b1!4m6!3m5!1s0x134e01631231dc3d:0x5206ac3b9daadf41!8m2!3d42.0750554!4d19.5238237!16s%2Fg%2F11nvz7jj9s" target="_blank" rel="noopener">Shkodër</a>
+          <a class="rv-btn go" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Muriqan" target="_blank" rel="noopener">Muriqan</a>
+        </div>
       </div>
     </div>
   </section>
   <section data-s>
     <div class="card">
       <div class="eyebrow" data-i18n="loc.eb">Gjithmonë afër teje</div>
-      <h2 data-i18n="loc.h2">3 ndalesa.<br><span class="g">0 pushime.</span></h2>
+      <h2 data-i18n="loc.h2">3 ndalesa.<br><span class="g">0 pritje.</span></h2>
       <div class="locs">
         <a href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Kryebushat" target="_blank" rel="noopener">Stop&amp;Go · Kryebushat <span data-i18n="loc.open">Hapur →</span></a>
         <a href="https://www.google.com/maps/place/Stop%26Go+Shkoder/@42.0750554,19.5238237,837m/data=!3m2!1e3!4b1!4m6!3m5!1s0x134e01631231dc3d:0x5206ac3b9daadf41!8m2!3d42.0750554!4d19.5238237!16s%2Fg%2F11nvz7jj9s" target="_blank" rel="noopener">Stop&amp;Go · Shkodër <span data-i18n="loc.open">Hapur →</span></a>
@@ -340,9 +347,9 @@
       "mini.ul": "<li>Cold drinks</li><li>Snacks</li><li>Everyday essentials</li><li>24/7</li>",
       "rv.eb": "What customers say",
       "rv.h2": 'What travellers<span class="g" style="display:block;margin-top:.3em">are saying.</span>',
-      "rv.tr": "translated from French", "rv.all": "See all ↗", "rv.leave": "Leave a review",
+      "rv.tr": "translated from French", "rv.leave": "Leave a review",
       "loc.eb": "Always close to you",
-      "loc.h2": '3 stops.<br><span class="g">0 days off.</span>',
+      "loc.h2": '3 stops.<br><span class="g">0 waiting.</span>',
       "loc.open": "Open →",
       "fin.h2": 'Your next <br class="m-br">stop<br><span class="r">awaits.</span>',
       "fin.btn": "Find the nearest stop",
@@ -367,9 +374,9 @@
       "mini.ul": "<li>Bevande fresche</li><li>Snack</li><li>Prodotti quotidiani</li><li>24/7</li>",
       "rv.eb": "Dicono di noi",
       "rv.h2": 'Cosa dicono<span class="g" style="display:block;margin-top:.3em">i viaggiatori.</span>',
-      "rv.tr": "tradotto dal francese", "rv.all": "Vedi tutte ↗", "rv.leave": "Lascia una recensione",
+      "rv.tr": "tradotto dal francese", "rv.leave": "Lascia una recensione",
       "loc.eb": "Sempre vicino a te",
-      "loc.h2": '3 sedi.<br><span class="g">Sempre aperte.</span>',
+      "loc.h2": '3 sedi.<br><span class="g">0 attese.</span>',
       "loc.open": "Aperto →",
       "fin.h2": 'La tua prossima <br class="m-br">tappa<br><span class="r">ti aspetta.</span>',
       "fin.btn": "Trova la sede più vicina",
@@ -394,9 +401,9 @@
       "mini.ul": "<li>Kalte Getränke</li><li>Snacks</li><li>Alltagsbedarf</li><li>24/7</li>",
       "rv.eb": "Kundenstimmen",
       "rv.h2": 'Was Reisende<span class="g" style="display:block;margin-top:.3em">sagen.</span>',
-      "rv.tr": "aus dem Französischen übersetzt", "rv.all": "Alle ansehen ↗", "rv.leave": "Bewertung schreiben",
+      "rv.tr": "aus dem Französischen übersetzt", "rv.leave": "Bewertung schreiben",
       "loc.eb": "Immer in deiner Nähe",
-      "loc.h2": '3 Standorte.<br><span class="g">Immer offen.</span>',
+      "loc.h2": '3 Standorte.<br><span class="g">0 Wartezeit.</span>',
       "loc.open": "Geöffnet →",
       "fin.h2": 'Dein nächster <br class="m-br">Stopp<br><span class="r">wartet.</span>',
       "fin.btn": "Nächsten Standort finden",
@@ -421,9 +428,9 @@
       "mini.ul": "<li>Hladna pića</li><li>Grickalice</li><li>Svakodnevni proizvodi</li><li>0–24</li>",
       "rv.eb": "Riječ gostiju",
       "rv.h2": 'Što kažu<span class="g" style="display:block;margin-top:.3em">putnici.</span>',
-      "rv.tr": "prevedeno s francuskog", "rv.all": "Pogledaj sve ↗", "rv.leave": "Ostavi recenziju",
+      "rv.tr": "prevedeno s francuskog", "rv.leave": "Ostavi recenziju",
       "loc.eb": "Uvijek blizu tebe",
-      "loc.h2": '3 lokacije.<br><span class="g">Uvijek otvoreno.</span>',
+      "loc.h2": '3 lokacije.<br><span class="g">0 čekanja.</span>',
       "loc.open": "Otvoreno →",
       "fin.h2": 'Tvoja sljedeća <br class="m-br">stanica<br><span class="r">te čeka.</span>',
       "fin.btn": "Pronađi najbližu lokaciju",
