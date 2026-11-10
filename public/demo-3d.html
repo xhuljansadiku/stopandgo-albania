@@ -8,7 +8,7 @@
 <meta property="og:title" content="Stop & Go — Ndalo. Shijo. Vazhdo.">
 <meta property="og:image" content="/images/storefront-1.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"CafeOrCoffeeShop","name":"Stop & Go","openingHours":"Mo-Su 00:00-24:00","servesCuisine":"Coffee, Snacks","address":{"@type":"PostalAddress","addressLocality":"Tiranë","addressCountry":"AL"},"geo":{"@type":"GeoCoordinates","latitude":41.3275,"longitude":19.8187}}
 </script>
@@ -24,11 +24,11 @@
   .card{max-width:520px;margin:0 auto 0 6vw;opacity:0;transform:translateY(40px)}
   .right .card{margin:0 6vw 0 auto}
   .center .card{margin:0 auto;text-align:center}
-  h1,h2{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:.92;letter-spacing:.01em}
+  h1,h2{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:1.08;letter-spacing:.01em}
   h1{font-size:clamp(56px,13vw,180px)}
   h2{font-size:clamp(40px,8vw,96px)}
-  h1+p,h2+p{margin-top:24px}
-  .eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  h1+p,h2+p{margin-top:32px}
+  .eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
   p{color:#d8d4cc;line-height:1.6;margin-top:16px;font-size:17px;text-shadow:0 2px 12px #000}
   .r{color:var(--red);text-shadow:0 0 24px var(--red)} .g{color:var(--green);text-shadow:0 0 24px var(--green)} .a{color:var(--amber)}
   ul{list-style:none;margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
@@ -39,13 +39,73 @@
   .quotes blockquote{padding:14px 18px;border-radius:14px;border:1px solid #fff2;background:#0009;backdrop-filter:blur(6px);color:#e8e4dc;font-size:15px;line-height:1.5}
   .quotes cite{display:flex;justify-content:space-between;gap:12px;margin-top:8px;font-style:normal;font-size:12px;letter-spacing:.08em;color:var(--muted)}
   .quotes cite b{color:#f5c77e;font-weight:400;letter-spacing:.1em;white-space:nowrap}
-  p.src{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .rv-cta{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .rv-stars{display:flex;flex-direction:column;margin-right:auto;color:#f5c77e;letter-spacing:.15em;font-size:15px;line-height:1.2}
+  .rv-stars small{color:var(--muted);font-size:10px;letter-spacing:.25em;text-transform:uppercase;margin-top:4px}
+  .rv-btn{padding:10px 16px;border-radius:99px;border:1px solid #fff3;background:#0009;backdrop-filter:blur(6px);color:var(--text);text-decoration:none;font-size:13px;font-weight:600;transition:border-color .2s,background .2s,box-shadow .2s}
+  .rv-btn:hover{border-color:#fff8}
+  .rv-btn.go{background:#1f9e3d;border-color:#1f9e3d;box-shadow:0 0 24px #3ddc5f55}
+  .rv-btn.go:hover{box-shadow:0 0 36px #3ddc5f99}
+  /* Desktop: reviews flank the road — odd ones left, even ones right, empty lane in the middle */
+  @media (min-width:701px){
+    .rv-sec .card{max-width:1500px;width:100%;margin:0 auto;padding:0 3vw;text-align:center}
+    .rv-sec .quotes{grid-template-columns:minmax(0,400px) 1fr minmax(0,400px);column-gap:24px;row-gap:14px;margin-top:36px;text-align:left}
+    .rv-sec .quotes blockquote:nth-child(odd){grid-column:1}
+    .rv-sec .quotes blockquote:nth-child(even){grid-column:3}
+    .rv-sec .rv-cta{justify-content:center;gap:14px;margin-top:28px}
+    .rv-sec .rv-stars{margin-right:12px;align-items:center}
+  }
   .locs{display:grid;gap:10px;margin-top:20px}
-  .locs a{display:flex;justify-content:space-between;padding:14px 18px;border-radius:14px;border:1px solid #fff2;background:#0009;color:var(--text);text-decoration:none}
+  .locs a{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;border-radius:14px;border:1px solid #fff2;background:#0009;color:var(--text);text-decoration:none}
   .locs a span{color:var(--green)}
   .hud{position:fixed;left:16px;bottom:16px;z-index:3;font-size:11px;letter-spacing:.25em;color:var(--muted);text-transform:uppercase}
+  /* Illyrian Pixel credit signature */
+  .site-foot{position:relative;z-index:2;padding:72px 16px 22px;background:linear-gradient(transparent,var(--bg) 45%)}
+  .site-foot .copy{text-align:center;font-size:12px;letter-spacing:.08em;color:var(--muted);margin-bottom:22px}
+  .ip-sig{display:flex;align-items:center;gap:clamp(12px,2vw,24px);max-width:1200px;margin:0 auto}
+  .ip-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgb(201 161 90 / .45))}
+  .ip-line.r{background:linear-gradient(90deg,rgb(201 161 90 / .45),transparent)}
+  .ip-pill{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:14px;padding:10px 18px 10px 10px;border-radius:999px;border:1px solid rgb(201 161 90 / .4);background:linear-gradient(135deg,rgb(234 206 113 / .10),rgb(176 136 58 / .03));box-shadow:inset 0 1px 0 rgb(255 240 200 / .08);text-decoration:none;transition:border-color .35s cubic-bezier(.2,.7,.2,1),transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s cubic-bezier(.2,.7,.2,1)}
+  .ip-pill::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgb(255 236 170 / .18) 50%,transparent 65%);transform:translateX(-130%);animation:ipSweep 6s ease-in-out infinite;pointer-events:none}
+  .ip-medal{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#2a2318,#0E0D0C);border:1px solid rgb(234 206 113 / .55);box-shadow:0 0 0 4px rgb(201 161 90 / .08)}
+  .ip-medal img{width:26px;height:auto;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .ip-txt{display:flex;flex-direction:column;gap:2px;text-align:left}
+  .ip-by{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .ip-name{font-family:Anton,Impact,sans-serif;font-size:20px;line-height:1;text-transform:uppercase;background:linear-gradient(100deg,#ab8339 0%,#eace71 40%,#fff3c4 50%,#eace71 60%,#ab8339 100%);background-size:250% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ipShimmer 6s ease-in-out infinite}
+  .ip-name em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;text-transform:none;font-size:1.1em;letter-spacing:0}
+  .ip-arrow{color:#C9A15A;font-size:15px;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+  .ip-pill:hover{border-color:#eace71;transform:translateY(-2px);box-shadow:inset 0 1px 0 rgb(255 240 200 / .08),0 0 0 5px rgb(201 161 90 / .08),0 16px 36px -14px rgb(201 161 90 / .55)}
+  .ip-pill:hover .ip-medal img{transform:rotate(-10deg) scale(1.1)}
+  .ip-pill:hover .ip-arrow{transform:translateX(4px)}
+  .ip-pill:focus-visible{outline:2px solid #C9A15A;outline-offset:4px}
+  @keyframes ipShimmer{0%,55%{background-position:100% 0}85%,100%{background-position:0 0}}
+  @keyframes ipSweep{0%,55%{transform:translateX(-130%)}85%,100%{transform:translateX(130%)}}
+  @media (max-width:640px){.ip-line{display:none}.ip-sig{justify-content:center}}
+  @media (prefers-reduced-motion:reduce){.ip-name{animation:none;background-position:50% 0}.ip-pill::after{animation:none;display:none}}
+  .hud{transition:opacity .4s}.hud.off{opacity:0}
   .bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--red),var(--amber),var(--green));z-index:3;width:0}
-  @media (max-width:700px){.card,.right .card{margin:0 auto}section{min-height:120vh}}
+  .kafe-sec{min-height:200vh;align-items:flex-start;padding-top:40vh} .kafe-card{position:sticky;top:20vh}
+  .mini-sec{margin-top:-60vh} .final-sec{min-height:110vh}
+  /* empty stretch after the last card: the 3D logo assembles here, then the footer follows */
+  .logo-sec{min-height:150vh} .static .logo-sec{display:none}
+  .m-br{display:none}
+  @media (max-width:700px){.d-br{display:none}}
+  /* Mobile: text sits in the lower half on a dark glass panel, the 3D camera frames its subject in the upper half */
+  @media (max-width:700px){
+    section{min-height:100vh;min-height:100svh;align-items:flex-end;padding:0 16px 7vh}
+    .card,.right .card{margin:0 auto;width:100%;padding:20px 18px 22px;border-radius:20px;background:rgba(7,7,10,.58);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid #ffffff14}
+    .kafe-sec{min-height:200vh;min-height:200svh;align-items:flex-start;padding-top:calc(93svh - var(--kh, 60svh));margin-top:-30svh} /* shorter drive after "Vazhdo." */
+    .kafe-card{top:calc(93svh - var(--kh, 60svh))}
+    .final-sec{min-height:100vh;min-height:100svh}
+    p{font-size:15px}
+    li{font-size:13px;padding:6px 12px}
+    .rv-stars{width:100%;flex-direction:row;align-items:center;gap:10px}
+    .rv-stars small{margin-top:0}
+    .rv-btn{flex:1;text-align:center}
+    .hud{display:none}
+    h1,h2{line-height:1.14}
+    .m-br{display:inline}
+  }
   /* reduced motion / no WebGL: static poster */
   .static #gl{display:none}
   .static body{background:linear-gradient(#07070acc,#07070a),url(/images/storefront-1.jpg) center/cover fixed}
@@ -78,37 +138,42 @@
       <p>Drita është gjithmonë ndezur. Kalo kur të duash.</p>
     </div>
   </section>
-  <section id="kafe" data-s style="min-height:200vh;align-items:flex-start;padding-top:40vh">
-    <div class="card" style="position:sticky;top:20vh">
+  <section id="kafe" class="kafe-sec" data-s>
+    <div class="card kafe-card">
       <div class="eyebrow">01 · Kafe</div>
       <h2>Kafe që shijon<br><span class="a">çdo herë.</span></h2>
       <p>Te Stop &amp; Go të pret Ama Caffè.<br>Nga espresso e preferuar te cappuccino<br>që mund ta shijosh gjatë pushimit tënd.<br>Merre me vete ose ulu dhe shijoje pa nxitim.</p>
       <ul><li>Ama Caffè</li><li>Take away</li><li>Ambient i jashtëm</li></ul>
     </div>
   </section>
-  <section data-s style="margin-top:-60vh">
+  <section class="mini-sec" data-s>
     <div class="card">
       <div class="eyebrow">02 · Minimarket</div>
       <h2>Gjithçka<span class="r" style="display:block;margin-top:.14em">për rrugën.</span></h2>
-      <p>Produkte të përditshme dhe pije të ftohta, gati për çdo udhëtim — ditë apo natë.</p>
-      <ul><li>Pije të ftohta</li><li>Produkte të përditshme</li><li>Snack me vetëshërbim</li></ul>
+      <p>Çfarë të duhet gjatë udhëtimit, e gjen këtu.<br>Pije të ftohta, snacks dhe produkte të përditshme,<br>24 orë në ditë, 7 ditë në javë.</p>
+      <ul><li>Pije të ftohta</li><li>Snacks</li><li>Produkte të përditshme</li><li>24/7</li></ul>
     </div>
   </section>
-  <section data-s>
+  <section data-s class="rv-sec">
     <div class="card">
       <div class="eyebrow">Fjala e klientëve</div>
-      <h2>Çfarë thonë<br><span class="g">udhëtarët.</span></h2>
+      <h2>Çfarë thonë<span class="g" style="display:block;margin-top:.3em">udhëtarët.</span></h2>
       <div class="quotes">
         <blockquote>“Great coffee! Really nice people working here.”<cite>Almir C. <b>★★★★★</b></cite></blockquote>
         <blockquote>“Perfect place to stop for coffee etc during your trip and you can pay in euros.”<cite>Dimitris D. <b>★★★★★</b></cite></blockquote>
-        <blockquote>“Perfect place to rest during a long trip. Very reasonable prices and very clean environment.”<cite>Xhulio K. <b>★★★★★</b></cite></blockquote>
-        <blockquote>“Perfect spots for a quick coffee break. The place is clean and welcoming, and the waitress is very friendly.”<cite>Christophe R. · përkthyer nga frëngjishtja <b>★★★★★</b></cite></blockquote>
+        <blockquote>“Perfect place to rest during a long trip.<br class="d-br"> Very reasonable prices and very clean environment.”<cite>Xhulio K. <b>★★★★★</b></cite></blockquote>
+        <blockquote>“Perfect spots for a quick coffee break.<br class="d-br"> The place is clean and welcoming, and the waitress is very friendly.”<cite>Christophe R. · përkthyer nga frëngjishtja <b>★★★★★</b></cite></blockquote>
         <blockquote>“Everything you need to rest and recharge with energy!”<cite>Robert C. <b>★★★★★</b></cite></blockquote>
+        <blockquote>“Everything is perfect.<br class="d-br"> Staff is very kind and helpful if you ask for any trip or road advice.<br class="d-br"> Food is perfect and it's a very clean coffee shop.<br class="d-br"> Worth to try it.”<cite>The Old Man <b>★★★★★</b></cite></blockquote>
       </div>
-      <p class="src">Vlerësime nga Google Maps</p>
+      <div class="rv-cta">
+        <span class="rv-stars">★★★★★<small>Google Maps</small></span>
+        <a class="rv-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Kryebushat" target="_blank" rel="noopener">Shiko të gjitha ↗</a>
+        <a class="rv-btn go" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Kryebushat" target="_blank" rel="noopener">Lër vlerësim</a>
+      </div>
     </div>
   </section>
-  <section class="center" data-s>
+  <section data-s>
     <div class="card">
       <div class="eyebrow">Gjithmonë afër teje</div>
       <h2>3 ndalesa.<br><span class="g">0 pushime.</span></h2>
@@ -119,14 +184,39 @@
       </div>
     </div>
   </section>
-  <section class="center" data-s style="min-height:180vh">
+  <section class="center final-sec" data-s>
     <div class="card">
-      <h2>Ndalesa jote e radhës<br><span class="r">të pret.</span></h2>
+      <h2>Ndalesa jote <br class="m-br">e radhës<br><span class="r">të pret.</span></h2>
       <a class="btn go" href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Albania" target="_blank" rel="noopener">Gjej ndalesën më të afërt</a>
       <p style="font-size:13px;color:var(--muted)">E hënë – E diel · 00:00 – 24:00</p>
     </div>
   </section>
+  <section class="logo-sec" aria-hidden="true"></section>
 </main>
+
+<footer class="site-foot">
+  <p class="copy">© 2026 Stop &amp; Go Albania</p>
+  <div class="ip-sig">
+    <span class="ip-line" aria-hidden="true"></span>
+    <a class="ip-pill" href="https://illyrianpixel.com" target="_blank" rel="noopener">
+      <span class="ip-medal"><img src="images/illyrianpixel_logo.svg" alt="" width="26" height="24"></span>
+      <span class="ip-txt">
+        <span class="ip-by">Designed &amp; Developed by</span>
+        <span class="ip-name">Illyrian <em>Pixel</em></span>
+      </span>
+      <span class="ip-arrow" aria-hidden="true">→</span>
+    </a>
+    <span class="ip-line r" aria-hidden="true"></span>
+  </div>
+</footer>
+<script>
+  // --kh = coffee card height, lets the sticky card sit at the bottom of the screen on phones
+  const kc = document.querySelector(".kafe-card"), setKh = () => document.documentElement.style.setProperty("--kh", kc.offsetHeight + "px");
+  new ResizeObserver(setKh).observe(kc); setKh();
+  // fade the fixed HUD out while the footer is on screen so they never overlap
+  new IntersectionObserver(([e]) => document.getElementById("hud").classList.toggle("off", e.isIntersecting))
+    .observe(document.querySelector(".site-foot"));
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -156,9 +246,12 @@ if (!reduced) {
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add(t => lenis.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);
-  document.querySelectorAll('[data-s] .card').forEach(c =>
-    gsap.to(c, { opacity: 1, y: 0, ease: 'none',
-      scrollTrigger: { trigger: c, start: 'top 85%', end: 'top 45%', scrub: true } }));
+  // phones: cards sit at the bottom of the screen, so they must be fully in a bit earlier; the first card shows on load
+  const phone = matchMedia('(max-width:700px)').matches;
+  document.querySelectorAll('[data-s] .card').forEach((c, i) => i === 0
+    ? gsap.to(c, { opacity: 1, y: 0, duration: 1.2, delay: 0.3, ease: 'power2.out' })
+    : gsap.to(c, { opacity: 1, y: 0, ease: 'none',
+      scrollTrigger: { trigger: c, start: phone ? 'top 98%' : 'top 85%', end: phone ? 'top 72%' : 'top 45%', scrub: true } }));
   // coffee card is sticky: fade it out as soon as the camera leaves the cup, so the next text takes over
   gsap.fromTo('#kafe .card', { opacity: 1, y: 0 }, { opacity: 0, y: -40, ease: 'none', immediateRender: false,
     scrollTrigger: { trigger: '#kafe', start: 'bottom 120%', end: 'bottom 102%', scrub: true } });
@@ -572,28 +665,70 @@ function initScene() {
   mmLight.shadow.camera.near = 4; mmLight.shadow.camera.far = 24; mmLight.shadow.radius = 4;
   const mmFill = new THREE.PointLight(0xffe2c0, 0, 16, 2); mmFill.position.set(SHELF_X - 3, 2.2, SHELF_Z + 6); scene.add(mmFill);
 
-  // ---------- Location pins ----------
+  // ---------- The 3 stops: miniature Stop & Go stores along the roadside, each with a pin + city label ----------
+  // Near → far: Kryebushat, Shkodër, Muriqan (same order as the list in the card)
+  const STOP_CAM = new THREE.Vector3(-3, 6.5, -160); // matches the 0.88 keyframe, stores turn to face it
+  const photoTex = texLoader.load('images/storefront-1.jpg', t => { t.colorSpace = THREE.SRGBColorSpace; });
+  photoTex.repeat.set(1, 397 / 992); photoTex.offset.set(0, (992 - 822) / 992);
+  const logoTex = texLoader.load('images/stopandgo-albania_logo.png', t => { t.colorSpace = THREE.SRGBColorSpace; });
+  const slatTex = labelTex(512, 64, (g, w, h) => { // wooden slat fascia with the warm LED dots from the real store
+    g.fillStyle = '#4a2f1c'; g.fillRect(0, 0, w, h);
+    for (let x = 0; x < w; x += 8) { g.fillStyle = x % 16 ? '#5c3b23' : '#3a2415'; g.fillRect(x, 0, 6, h); }
+    g.fillStyle = '#ffd9a0'; for (let x = 4; x < w; x += 16) { g.beginPath(); g.arc(x, 6, 2.2, 0, 7); g.fill(); }
+  });
+  const poolTex = labelTex(128, 128, (g, w, h) => {
+    const rg = g.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2);
+    rg.addColorStop(0, 'rgba(255,214,160,0.32)'); rg.addColorStop(0.55, 'rgba(255,214,160,0.12)'); rg.addColorStop(1, 'rgba(255,214,160,0)'); g.fillStyle = rg; g.fillRect(0, 0, w, h);
+  });
+  const cityTex = (name) => labelTex(512, 160, (g, w, h) => {
+    g.fillStyle = 'rgba(8,8,12,0.72)'; g.beginPath(); g.roundRect(16, 20, w - 32, h - 40, 60); g.fill();
+    g.strokeStyle = 'rgba(61,220,95,0.55)'; g.lineWidth = 3; g.stroke();
+    centerText(g, name.toUpperCase(), w / 2, 66, 46, '#f4f1ea', 440, 600, 'Inter, sans-serif');
+    centerText(g, '● HAPUR 24/7', w / 2, 112, 24, '#3ddc5f', 440, 600, 'Inter, sans-serif');
+  });
+  const wallM = new THREE.MeshStandardMaterial({ color: 0x1b1b20, roughness: 0.8 });
+  const slabM = new THREE.MeshStandardMaterial({ color: 0x2c2c31, roughness: 0.95 });
+  const frameM = new THREE.MeshStandardMaterial({ color: 0x0b0b0d, roughness: 0.5, metalness: 0.4 });
+  const slatM = new THREE.MeshStandardMaterial({ map: slatTex, roughness: 0.75, emissive: 0xffffff, emissiveMap: slatTex, emissiveIntensity: 0 });
+  const pinM = new THREE.MeshStandardMaterial({ color: 0x3ddc5f, emissive: 0x1f9e3d, emissiveIntensity: 0.9, roughness: 0.25, metalness: 0.1 });
   const pins = [];
-  [[-4, -175], [0, -182], [4, -175]].forEach(([x, z]) => {
-    const g = new THREE.Group();
-    const head = new THREE.Mesh(new THREE.SphereGeometry(0.7, 24, 16), new THREE.MeshBasicMaterial({ color: 0x3ddc5f, toneMapped: false }));
-    head.position.y = 3; g.add(head);
-    const tip = new THREE.Mesh(new THREE.ConeGeometry(0.5, 1.6, 24), head.material); tip.rotation.x = Math.PI; tip.position.y = 1.9; g.add(tip);
-    const ring = new THREE.Mesh(new THREE.RingGeometry(0.8, 1, 48), new THREE.MeshBasicMaterial({ color: 0x3ddc5f, transparent: true, toneMapped: false }));
-    ring.rotation.x = -Math.PI / 2; ring.position.y = 0.02; g.add(ring);
-    g.position.set(x, 0, z); g.scale.setScalar(0.001); scene.add(g); pins.push({ g, ring });
+  [['Kryebushat', 10, -168], ['Shkodër', 10.5, -176.5], ['Muriqan', 11, -185]].forEach(([name, x, z], i) => {
+    const g = new THREE.Group(), box = (w, h, d, m, px, py, pz) => { const o = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); o.position.set(px, py, pz); g.add(o); return o; };
+    box(4.4, 0.12, 3.2, slabM, 0, 0.06, 0.2);                        // concrete terrace
+    box(4, 2.0, 2.4, wallM, 0, 1.12, -0.2);                           // body
+    box(4.2, 0.08, 2.9, frameM, 0, 2.16, 0.05);                       // roof edge
+    box(4.1, 0.56, 0.1, slatM, 0, 1.86, 1.06);                        // wooden slat fascia
+    const glassM = new THREE.MeshBasicMaterial({ map: photoTex, color: 0x000000 });
+    const glass = new THREE.Mesh(new THREE.PlaneGeometry(3.7, 1.3), glassM); glass.position.set(0, 0.8, 1.01); g.add(glass);
+    [-1.85, -0.62, 0.62, 1.85].forEach(mx => box(0.05, 1.34, 0.05, frameM, mx, 0.8, 1.03)); // window mullions
+    const logoM = new THREE.MeshBasicMaterial({ map: logoTex, transparent: true, depthWrite: false, toneMapped: false, color: 0x000000 });
+    const logo = new THREE.Mesh(new THREE.PlaneGeometry(1.25, 0.566), logoM); logo.position.set(-0.9, 1.87, 1.13); g.add(logo);
+    const poolM = new THREE.MeshBasicMaterial({ map: poolTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0 });
+    const pool = new THREE.Mesh(new THREE.PlaneGeometry(5.4, 3), poolM); pool.rotation.x = -Math.PI / 2; pool.position.set(0, 0.125, 1.7); g.add(pool);
+    const pin = new THREE.Group(); pin.position.y = 3.2; g.add(pin);
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 16), pinM); pin.add(head);
+    const dot = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 8), new THREE.MeshBasicMaterial({ color: 0x0b2a14 })); dot.position.z = 0.24; pin.add(dot);
+    const tip = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.6, 32), pinM); tip.rotation.x = Math.PI; tip.position.y = -0.4; pin.add(tip);
+    const label = new THREE.Sprite(new THREE.SpriteMaterial({ map: cityTex(name), transparent: true, depthWrite: false, toneMapped: false }));
+    const ls = 1 + i * 0.4; label.scale.set(2.2 * ls, 0.69 * ls, 1); label.position.y = 3.9 + 0.35 * ls; g.add(label); // farther stores get bigger labels so all read the same
+    const ring = new THREE.Mesh(new THREE.RingGeometry(1.0, 1.05, 64), new THREE.MeshBasicMaterial({ color: 0x3ddc5f, transparent: true, depthWrite: false, toneMapped: false }));
+    ring.rotation.x = -Math.PI / 2; ring.position.set(0, 0.14, 0.2); g.add(ring);
+    g.position.set(x, 0, z); g.rotation.y = Math.atan2(STOP_CAM.x - x, STOP_CAM.z - z) * 0.85;
+    g.scale.setScalar(0.001); scene.add(g);
+    pins.push({ g, pin, ring, glassM, logoM, poolM });
   });
 
   // ---------- Final logo: letters fly in from scattered positions ----------
-  const finalMat = new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false });
-  document.fonts.ready.then(() => { finalMat.map = neonTex('STOP & GO', '#3ddc5f'); finalMat.needsUpdate = true; });
+  // the real Stop & Go logo (same PNG as the store sign), sliced into strips that fly together
+  const finalMat = new THREE.MeshBasicMaterial({ map: logoTex, transparent: true, depthWrite: false, toneMapped: false, color: 0xe6e6e6 });
+  const LOGO_W = 12, LOGO_H = LOGO_W * 332 / 733; // logo aspect 733×332
   const pieces = [];
   const N = 12; // slice the sign into vertical strips
   for (let i = 0; i < N; i++) {
-    const geo = new THREE.PlaneGeometry(12 / N, 3);
+    const geo = new THREE.PlaneGeometry(LOGO_W / N, LOGO_H);
     const uv = geo.attributes.uv; for (let k = 0; k < uv.count; k++) uv.setX(k, (i + uv.getX(k)) / N);
     const m = new THREE.Mesh(geo, finalMat);
-    const target = new THREE.Vector3(-6 + (i + 0.5) * 12 / N, 5, -205);
+    const target = new THREE.Vector3(-LOGO_W / 2 + (i + 0.5) * LOGO_W / N, 5, -205);
     const from = new THREE.Vector3((Math.random() - 0.5) * 40, Math.random() * 20 - 4, -205 - Math.random() * 30);
     m.userData = { target, from, rot: (Math.random() - 0.5) * 6 }; scene.add(m); pieces.push(m);
   }
@@ -623,15 +758,25 @@ function initScene() {
     [0.48, [0.5, 3.6, -92], [-3, 3.2, -100]],     // arrive at the espresso machine
     [0.55, [-0.6, 2.6, -94.5], [-3, 2.6, -100]],  // macro: streams into the cup
     [0.62, [-2, 4.4, -96.5], [-3, 2.2, -100]],    // look down at the crema
-    [0.68, [2.4, 3, -123], [3.4, 2.9, -134]],     // mini-market shelf, on the right of the frame
-    [0.75, [2.8, 2.9, -125], [3.6, 2.8, -134]],   // slow dolly in while the card is up
-    [0.81, [-2, 4, -150], [-1, 3, -165]],         // pass left of the shelf
-    [0.88, [0, 9, -160], [0, 0, -178]],     // pins from above
-    [1.00, [0, 5, -186], [0, 5, -205]],     // logo reassembled
+    // optional 4th item = portrait (phone) framing: subject centred and in the upper half, the text panel sits below
+    [0.68, [2.4, 3, -123], [3.4, 2.9, -134], [[5.2, 3.6, -118], [6, -2.5, -134]]],     // mini-market shelf, on the right of the frame
+    [0.75, [2.8, 2.9, -125], [3.6, 2.8, -134], [[5.3, 3.5, -119], [6, -2.3, -134]]],   // slow dolly in while the card is up
+    [0.81, [-2, 4, -150], [-1, 3, -165], [[-4, 4, -150], [-1, 1, -165]]],             // pass left of the shelf
+    [0.88, [-3, 6.5, -160], [10, 1.5, -178], [[2, 8, -152], [10.5, -7.5, -176]]],     // the 3 stores along the roadside
+    [0.93, [-2.6, 6.1, -162.5], [10, 1.4, -178.5], [[2.3, 7.7, -153.5], [10.5, -7.2, -176.5]]], // slow push-in while the card is up
+    [1.00, [0, 5, -186], [0, 5, -205], [[0, 5, -181], [0, -3.2, -205]]],     // logo reassembled
   ];
   const v3 = a => new THREE.Vector3(...a);
-  const posCurve = new THREE.CatmullRomCurve3(K.map(k => v3(k[1])));
-  const lookCurve = new THREE.CatmullRomCurve3(K.map(k => v3(k[2])));
+  let posCurve, lookCurve, portrait = null;
+  function buildCurves(port) { // portrait without an explicit framing: tilt down so the subject rises into the upper half
+    const pts = K.map(k => {
+      if (port && k[3]) return k[3];
+      if (!port) return [k[1], k[2]];
+      const lk = v3(k[2]); lk.y -= 0.34 * v3(k[1]).distanceTo(lk); return [k[1], lk.toArray()];
+    });
+    posCurve = new THREE.CatmullRomCurve3(pts.map(q => v3(q[0])));
+    lookCurve = new THREE.CatmullRomCurve3(pts.map(q => v3(q[1])));
+  }
   // Map global progress → curve parameter so keyframes land at their scroll %
   function curveT(p) {
     for (let i = 0; i < K.length - 1; i++) if (p <= K[i + 1][0]) {
@@ -657,8 +802,10 @@ function initScene() {
       [s[3].offsetTop + s[3].offsetHeight - vh, 0.64],    // …and stays through the pour + steam
       [mid(s[4]), 0.72],                                  // Minimarket → product shelves
       [mid(s[5]), 0.80],                                  // Klientët
-      [mid(s[6]), 0.90],                                  // 3 ndalesa → map pins from above
-      [max, 1],
+      [mid(s[6]), 0.905],                                 // 3 ndalesa → the three stores
+      [mid(s[7]), 0.955],                                 // last card → empty road, logo still hidden
+      [mid(s[8]), 1],                                     // card gone → logo assembled
+      [max, 1],                                           // footer
     ];
     for (let i = 1; i < a.length; i++) a[i][0] = Math.max(a[i][0], a[i - 1][0] + 1); // keep monotonic on odd layouts
     anchors = a;
@@ -683,6 +830,7 @@ function initScene() {
     const w = innerWidth, h = innerHeight;
     renderer.setSize(w, h, false); composer.setSize(w, h); camera.aspect = w / h;
     camera.fov = w < h ? 70 : 55; camera.updateProjectionMatrix();
+    const port = w < h && w < 900; if (port !== portrait) { portrait = port; buildCurves(port); }
   }
   addEventListener('resize', resize); resize();
 
@@ -773,20 +921,25 @@ function initScene() {
     mmLight.intensity = 40 * shelfLit; mmFill.intensity = 6 * shelfLit;
     ledMat.color.setRGB(1, 0.86, 0.66).multiplyScalar(0.9 * shelfLit);
 
-    // Pins pop up one by one
+    // Stores rise one by one (near → far), windows + neon switch on, pin bobs, a soft ring pulses on the ground
     pins.forEach((pn, i) => {
-      const s = smooth(0.78 + i * 0.025, 0.82 + i * 0.025, p);
-      pn.g.scale.setScalar(Math.max(0.001, s)); pn.g.children[0].position.y = 3 + Math.sin(t * 2 + i) * 0.2;
-      const r = (t * 0.6 + i * 0.3) % 1; pn.ring.scale.setScalar(1 + r * 3); pn.ring.material.opacity = 1 - r;
+      const s = smooth(0.8 + i * 0.025, 0.85 + i * 0.025, p), on = smooth(0.83 + i * 0.025, 0.87 + i * 0.025, p);
+      pn.g.scale.setScalar(Math.max(0.001, s));
+      pn.glassM.color.setScalar(0.85 * on); pn.logoM.color.setScalar(1.4 * on * (0.94 + 0.06 * Math.sin(t * 9 + i))); pn.poolM.opacity = on;
+      pn.pin.position.y = 3.2 + Math.sin(t * 2 + i) * 0.12; pn.pin.rotation.y = t * 0.8;
+      const r = (t * 0.45 + i * 0.33) % 1; pn.ring.scale.setScalar(1 + r * 1.8); pn.ring.material.opacity = 0.6 * (1 - r) * on;
     });
+    slatM.emissiveIntensity = 0.35 * smooth(0.83, 0.88, p);
 
     // Logo reassembly
-    const asm = smooth(0.86, 0.99, p);
+    // starts only once the last text card is scrolling away, so text and logo never overlap
+    const asm = smooth(0.972, 0.998, p);
     pieces.forEach(m => {
+      m.visible = asm > 0;
       m.position.lerpVectors(m.userData.from, m.userData.target, asm);
       m.rotation.z = m.userData.rot * (1 - asm); m.rotation.y = m.userData.rot * (1 - asm) * 0.5;
     });
-    finalMat.opacity = 0.2 + asm * 0.8;
+    finalMat.opacity = smooth(0.972, 0.985, p);
 
     // Rain follows the camera
     for (let i = 0; i < RAIN; i++) {
