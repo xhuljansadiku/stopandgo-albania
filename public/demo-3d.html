@@ -106,6 +106,54 @@
     h1,h2{line-height:1.14}
     .m-br{display:inline}
   }
+  /* ---------- Navbar: floating glass pill ---------- */
+  .nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:10;width:min(1200px,calc(100% - 24px));display:flex;align-items:center;gap:6px;padding:7px 8px 7px 20px;border-radius:999px;background:rgba(7,7,10,.55);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid #ffffff17;box-shadow:0 12px 40px -14px #000d}
+  .nav-logo{display:block;margin-right:auto} .nav-logo img{height:30px;width:auto;display:block}
+  .nav-main{display:flex;align-items:center;gap:4px}
+  .nav-btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px;border-radius:99px;border:1px solid transparent;background:none;color:var(--text);font:600 13px/1 Inter,system-ui,sans-serif;letter-spacing:.02em;cursor:pointer;text-decoration:none;transition:background .2s,border-color .2s}
+  .nav-btn:hover,.nav-btn[aria-expanded="true"]{background:#ffffff10;border-color:#ffffff1f}
+  .nav-btn:focus-visible,.soc a:focus-visible,.dd-panel a:focus-visible,.dd-panel button:focus-visible,.burger:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .nav svg{width:16px;height:16px;flex:none}
+  .chev{width:14px!important;height:14px!important;opacity:.7;transition:transform .2s}
+  [aria-expanded="true"] .chev{transform:rotate(180deg)}
+  .nav-sep{width:1px;height:22px;background:#ffffff1f;margin:0 6px}
+  .soc{display:flex;gap:2px}
+  .soc a{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;color:var(--muted);transition:color .2s,background .2s}
+  .soc a:hover{color:var(--text);background:#ffffff10}
+  .soc svg{width:18px;height:18px}
+  .dd{position:relative}
+  .dd-panel{position:absolute;top:calc(100% + 12px);right:0;min-width:270px;padding:8px;border-radius:18px;background:rgba(12,12,16,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid #ffffff17;box-shadow:0 20px 50px -16px #000;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s,transform .2s,visibility .2s}
+  .dd.open .dd-panel{opacity:1;visibility:visible;transform:none}
+  .loc-link{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;color:var(--text);text-decoration:none;font-size:14px;font-weight:600;transition:background .2s}
+  .loc-link:hover{background:#ffffff0d}
+  .loc-link .ar{margin-left:auto;color:var(--muted);transition:transform .2s,color .2s} .loc-link:hover .ar{color:var(--green);transform:translate(2px,-2px)}
+  .loc-dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+  .loc-meta{display:block;margin-top:3px;font-size:11px;font-weight:400;letter-spacing:.06em;color:var(--muted)}
+  .lang-panel{min-width:190px}
+  .lang-panel button{display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;border:0;border-radius:12px;background:none;color:var(--text);font:400 14px Inter,system-ui,sans-serif;text-align:left;cursor:pointer;transition:background .2s}
+  .lang-panel button:hover{background:#ffffff0d}
+  .lang-panel .lc{margin-left:auto;font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--muted)}
+  .flag{flex:none;width:22px;height:16px;border-radius:3px;object-fit:cover;box-shadow:0 0 0 1px #ffffff26;display:block}
+  .lang-panel button[aria-current="true"]{background:#3ddc5f14} .lang-panel button[aria-current="true"] .lc{color:var(--green)}
+  .burger{display:none;width:40px;height:40px;border-radius:50%;border:1px solid #ffffff1f;background:none;cursor:pointer;position:relative}
+  .burger span{position:absolute;left:12px;right:12px;height:1.5px;background:var(--text);transition:transform .25s,top .25s}
+  .burger span:first-child{top:16px} .burger span:last-child{top:22px}
+  .nav.sheet-open .burger span:first-child{top:19px;transform:rotate(45deg)} .nav.sheet-open .burger span:last-child{top:19px;transform:rotate(-45deg)}
+  .nav-sheet{display:none}
+  @media (max-width:700px){
+    .nav{top:10px;width:calc(100% - 20px);padding:6px 6px 6px 16px}
+    .nav-logo img{height:26px}
+    .nav-main{display:none}
+    .burger{display:block}
+    .lang-btn{padding:0 12px}
+    .nav-sheet{display:block;position:absolute;top:calc(100% + 10px);left:0;right:0;padding:10px;border-radius:22px;background:rgba(12,12,16,.95);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid #ffffff17;box-shadow:0 20px 50px -16px #000;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s,transform .2s,visibility .2s}
+    .nav.sheet-open .nav-sheet{opacity:1;visibility:visible;transform:none}
+    .sheet-h{margin:6px 12px 6px;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);text-shadow:none}
+    .sheet-h + .loc-link{margin-top:0}
+    .sheet-soc{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:4px 2px 2px}
+    .sheet-soc a{display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:14px;border:1px solid #ffffff17;color:var(--text);text-decoration:none;font-size:13px;font-weight:600}
+    .sheet-soc svg{width:17px;height:17px}
+  }
   /* reduced motion / no WebGL: static poster */
   .static #gl{display:none}
   .static body{background:linear-gradient(#07070acc,#07070a),url(/images/storefront-1.jpg) center/cover fixed}
@@ -118,77 +166,129 @@
 <div class="bar" id="bar"></div>
 <div class="hud" id="hud">Ora 02:14 · Rruga kombëtare</div>
 
+<header class="nav" id="nav">
+  <a class="nav-logo" href="#" aria-label="Stop &amp; Go Albania"><img src="images/stopandgo-albania_logo.png" alt="Stop &amp; Go" width="66" height="30"></a>
+  <nav class="nav-main" aria-label="Main">
+    <div class="dd">
+      <button type="button" class="nav-btn" aria-expanded="false" aria-controls="loc-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        <span data-i18n="nav.loc">Lokacionet</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="dd-panel" id="loc-panel">
+        <a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Kryebushat" target="_blank" rel="noopener"><span class="loc-dot"></span><span>Kryebushat<span class="loc-meta" data-i18n="nav.open">Hapur 24/7</span></span><span class="ar">↗</span></a>
+        <a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Shkoder" target="_blank" rel="noopener"><span class="loc-dot"></span><span>Shkodër<span class="loc-meta" data-i18n="nav.open">Hapur 24/7</span></span><span class="ar">↗</span></a>
+        <a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Muriqan" target="_blank" rel="noopener"><span class="loc-dot"></span><span>Muriqan<span class="loc-meta" data-i18n="nav.open">Hapur 24/7</span></span><span class="ar">↗</span></a>
+      </div>
+    </div>
+    <span class="nav-sep" aria-hidden="true"></span>
+    <div class="soc">
+      <a data-soc="instagram" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a data-soc="facebook" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3z"/></svg></a>
+      <a data-soc="tiktok" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.3 2.2 1.6 3.6 3.9 3.8v2.6c-1.4.1-2.6-.3-3.9-1.1v5.3c0 6.6-7.2 8.7-10.1 4-1.9-3-.7-8.4 5.5-8.6v2.8c-.5.1-1 .2-1.4.4-1.4.5-2.2 1.4-2 3 .4 3.1 6.1 4 5.6-2.1V3h2.4z"/></svg></a>
+    </div>
+    <span class="nav-sep" aria-hidden="true"></span>
+  </nav>
+  <div class="dd">
+    <button type="button" class="nav-btn lang-btn" aria-expanded="false" aria-controls="lang-panel" aria-label="Language">
+      <img class="flag" id="lang-flag" src="images/flags/al.svg" alt="" width="22" height="16">
+      <span id="lang-cur">SQ</span>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <div class="dd-panel lang-panel" id="lang-panel">
+      <button type="button" data-lang="sq"><img class="flag" src="images/flags/al.svg" alt="" width="22" height="16">Shqip<span class="lc">SQ</span></button>
+      <button type="button" data-lang="en"><img class="flag" src="images/flags/gb.svg" alt="" width="22" height="16">English<span class="lc">EN</span></button>
+      <button type="button" data-lang="it"><img class="flag" src="images/flags/it.svg" alt="" width="22" height="16">Italiano<span class="lc">IT</span></button>
+      <button type="button" data-lang="de"><img class="flag" src="images/flags/de.svg" alt="" width="22" height="16">Deutsch<span class="lc">DE</span></button>
+      <button type="button" data-lang="hr"><img class="flag" src="images/flags/hr.svg" alt="" width="22" height="16">Hrvatski<span class="lc">HR</span></button>
+    </div>
+  </div>
+  <button type="button" class="burger" aria-expanded="false" aria-controls="nav-sheet" aria-label="Menu"><span></span><span></span></button>
+  <div class="nav-sheet" id="nav-sheet">
+    <p class="sheet-h" data-i18n="nav.loc">Lokacionet</p>
+    <a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Kryebushat" target="_blank" rel="noopener"><span class="loc-dot"></span><span>Kryebushat<span class="loc-meta" data-i18n="nav.open">Hapur 24/7</span></span><span class="ar">↗</span></a>
+    <a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Shkoder" target="_blank" rel="noopener"><span class="loc-dot"></span><span>Shkodër<span class="loc-meta" data-i18n="nav.open">Hapur 24/7</span></span><span class="ar">↗</span></a>
+    <a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Muriqan" target="_blank" rel="noopener"><span class="loc-dot"></span><span>Muriqan<span class="loc-meta" data-i18n="nav.open">Hapur 24/7</span></span><span class="ar">↗</span></a>
+    <p class="sheet-h" data-i18n="nav.follow">Na ndiq</p>
+    <div class="sheet-soc">
+      <a data-soc="instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+      <a data-soc="facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3z"/></svg>Facebook</a>
+      <a data-soc="tiktok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.3 2.2 1.6 3.6 3.9 3.8v2.6c-1.4.1-2.6-.3-3.9-1.1v5.3c0 6.6-7.2 8.7-10.1 4-1.9-3-.7-8.4 5.5-8.6v2.8c-.5.1-1 .2-1.4.4-1.4.5-2.2 1.4-2 3 .4 3.1 6.1 4 5.6-2.1V3h2.4z"/></svg>TikTok</a>
+    </div>
+  </div>
+</header>
+
 <main>
   <section class="center" data-s>
     <div class="card">
       <div class="eyebrow">Stop &amp; Go · Albania · 24/7</div>
-      <h1><span class="r">Ndalo.</span></h1>
-      <p class="lead">Çdo udhëtim ka nevojë për një pushim.</p>
+      <h1 data-i18n="s1.h1"><span class="r">Ndalo.</span></h1>
+      <p class="lead" data-i18n="s1.p">Çdo udhëtim ka nevojë për një pushim.</p>
     </div>
   </section>
   <section class="right" data-s>
     <div class="card">
-      <h2><span class="a" style="display:block;margin-bottom:.32em">Çlodhu.</span>Merr energji.</h2>
-      <p>Kafe, minimarket dhe snack food.<br>24 orë në ditë, 7 ditë në javë.</p>
+      <h2 data-i18n="s2.h2"><span class="a" style="display:block;margin-bottom:.32em">Çlodhu.</span>Merr energji.</h2>
+      <p data-i18n="s2.p">Kafe, minimarket dhe snack food.<br>24 orë në ditë, 7 ditë në javë.</p>
     </div>
   </section>
   <section class="center" data-s>
     <div class="card">
-      <h1><span class="g">Vazhdo.</span></h1>
-      <p>Drita është gjithmonë ndezur. Kalo kur të duash.</p>
+      <h1 data-i18n="s3.h1"><span class="g">Vazhdo.</span></h1>
+      <p data-i18n="s3.p">Drita është gjithmonë ndezur. Kalo kur të duash.</p>
     </div>
   </section>
   <section id="kafe" class="kafe-sec" data-s>
     <div class="card kafe-card">
-      <div class="eyebrow">01 · Kafe</div>
-      <h2>Kafe që shijon<br><span class="a">çdo herë.</span></h2>
-      <p>Te Stop &amp; Go të pret Ama Caffè.<br>Nga espresso e preferuar te cappuccino<br>që mund ta shijosh gjatë pushimit tënd.<br>Merre me vete ose ulu dhe shijoje pa nxitim.</p>
-      <ul><li>Ama Caffè</li><li>Take away</li><li>Ambient i jashtëm</li></ul>
+      <div class="eyebrow" data-i18n="kafe.eb">01 · Kafe</div>
+      <h2 data-i18n="kafe.h2">Kafe që shijon<br><span class="a">çdo herë.</span></h2>
+      <p data-i18n="kafe.p">Te Stop &amp; Go të pret Ama Caffè.<br>Nga espresso e preferuar te cappuccino<br>që mund ta shijosh gjatë pushimit tënd.<br>Merre me vete ose ulu dhe shijoje pa nxitim.</p>
+      <ul><li>Ama Caffè</li><li>Take away</li><li data-i18n="kafe.li">Ambient i jashtëm</li></ul>
     </div>
   </section>
   <section class="mini-sec" data-s>
     <div class="card">
-      <div class="eyebrow">02 · Minimarket</div>
-      <h2>Gjithçka<span class="r" style="display:block;margin-top:.14em">për rrugën.</span></h2>
-      <p>Çfarë të duhet gjatë udhëtimit, e gjen këtu.<br>Pije të ftohta, snacks dhe produkte të përditshme,<br>24 orë në ditë, 7 ditë në javë.</p>
-      <ul><li>Pije të ftohta</li><li>Snacks</li><li>Produkte të përditshme</li><li>24/7</li></ul>
+      <div class="eyebrow" data-i18n="mini.eb">02 · Minimarket</div>
+      <h2 data-i18n="mini.h2">Gjithçka<span class="r" style="display:block;margin-top:.14em">për rrugën.</span></h2>
+      <p data-i18n="mini.p">Çfarë të duhet gjatë udhëtimit, e gjen këtu.<br>Pije të ftohta, snacks dhe produkte të përditshme,<br>24 orë në ditë, 7 ditë në javë.</p>
+      <ul data-i18n="mini.ul"><li>Pije të ftohta</li><li>Snacks</li><li>Produkte të përditshme</li><li>24/7</li></ul>
     </div>
   </section>
   <section data-s class="rv-sec">
     <div class="card">
-      <div class="eyebrow">Fjala e klientëve</div>
-      <h2>Çfarë thonë<span class="g" style="display:block;margin-top:.3em">udhëtarët.</span></h2>
+      <div class="eyebrow" data-i18n="rv.eb">Fjala e klientëve</div>
+      <h2 data-i18n="rv.h2">Çfarë thonë<span class="g" style="display:block;margin-top:.3em">udhëtarët.</span></h2>
       <div class="quotes">
         <blockquote>“Great coffee! Really nice people working here.”<cite>Almir C. <b>★★★★★</b></cite></blockquote>
         <blockquote>“Perfect place to stop for coffee etc during your trip and you can pay in euros.”<cite>Dimitris D. <b>★★★★★</b></cite></blockquote>
         <blockquote>“Perfect place to rest during a long trip.<br class="d-br"> Very reasonable prices and very clean environment.”<cite>Xhulio K. <b>★★★★★</b></cite></blockquote>
-        <blockquote>“Perfect spots for a quick coffee break.<br class="d-br"> The place is clean and welcoming, and the waitress is very friendly.”<cite>Christophe R. · përkthyer nga frëngjishtja <b>★★★★★</b></cite></blockquote>
+        <blockquote>“Perfect spots for a quick coffee break.<br class="d-br"> The place is clean and welcoming, and the waitress is very friendly.”<cite>Christophe R. · <span data-i18n="rv.tr">përkthyer nga frëngjishtja</span> <b>★★★★★</b></cite></blockquote>
         <blockquote>“Everything you need to rest and recharge with energy!”<cite>Robert C. <b>★★★★★</b></cite></blockquote>
         <blockquote>“Everything is perfect.<br class="d-br"> Staff is very kind and helpful if you ask for any trip or road advice.<br class="d-br"> Food is perfect and it's a very clean coffee shop.<br class="d-br"> Worth to try it.”<cite>The Old Man <b>★★★★★</b></cite></blockquote>
       </div>
       <div class="rv-cta">
         <span class="rv-stars">★★★★★<small>Google Maps</small></span>
-        <a class="rv-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Kryebushat" target="_blank" rel="noopener">Shiko të gjitha ↗</a>
-        <a class="rv-btn go" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Kryebushat" target="_blank" rel="noopener">Lër vlerësim</a>
+        <a class="rv-btn" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Kryebushat" target="_blank" rel="noopener" data-i18n="rv.all">Shiko të gjitha ↗</a>
+        <a class="rv-btn go" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Kryebushat" target="_blank" rel="noopener" data-i18n="rv.leave">Lër vlerësim</a>
       </div>
     </div>
   </section>
   <section data-s>
     <div class="card">
-      <div class="eyebrow">Gjithmonë afër teje</div>
-      <h2>3 ndalesa.<br><span class="g">0 pushime.</span></h2>
+      <div class="eyebrow" data-i18n="loc.eb">Gjithmonë afër teje</div>
+      <h2 data-i18n="loc.h2">3 ndalesa.<br><span class="g">0 pushime.</span></h2>
       <div class="locs">
-        <a href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Kryebushat" target="_blank" rel="noopener">Stop&amp;Go · Kryebushat <span>Hapur →</span></a>
-        <a href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Shkoder" target="_blank" rel="noopener">Stop&amp;Go · Shkodër <span>Hapur →</span></a>
-        <a href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Muriqan" target="_blank" rel="noopener">Stop&amp;Go · Muriqan <span>Hapur →</span></a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Kryebushat" target="_blank" rel="noopener">Stop&amp;Go · Kryebushat <span data-i18n="loc.open">Hapur →</span></a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Shkoder" target="_blank" rel="noopener">Stop&amp;Go · Shkodër <span data-i18n="loc.open">Hapur →</span></a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Muriqan" target="_blank" rel="noopener">Stop&amp;Go · Muriqan <span data-i18n="loc.open">Hapur →</span></a>
       </div>
     </div>
   </section>
   <section class="center final-sec" data-s>
     <div class="card">
-      <h2>Ndalesa jote <br class="m-br">e radhës<br><span class="r">të pret.</span></h2>
-      <a class="btn go" href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Albania" target="_blank" rel="noopener">Gjej ndalesën më të afërt</a>
-      <p style="font-size:13px;color:var(--muted)">E hënë – E diel · 00:00 – 24:00</p>
+      <h2 data-i18n="fin.h2">Ndalesa jote <br class="m-br">e radhës<br><span class="r">të pret.</span></h2>
+      <a class="btn go" href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Albania" target="_blank" rel="noopener" data-i18n="fin.btn">Gjej ndalesën më të afërt</a>
+      <p style="font-size:13px;color:var(--muted)" data-i18n="fin.hours">E hënë – E diel · 00:00 – 24:00</p>
     </div>
   </section>
   <section class="logo-sec" aria-hidden="true"></section>
@@ -209,6 +309,164 @@
     <span class="ip-line r" aria-hidden="true"></span>
   </div>
 </footer>
+<script>
+  // ---------- Social links: one place to edit ----------
+  const SOCIAL = {
+    instagram: "https://www.instagram.com/",
+    facebook: "https://www.facebook.com/",
+    tiktok: "https://www.tiktok.com/",
+  };
+  document.querySelectorAll("[data-soc]").forEach(a => a.href = SOCIAL[a.dataset.soc]);
+
+  // ---------- i18n: Albanian is the HTML itself, other languages swap innerHTML by key ----------
+  const I18N = {
+    sq: { hud: ["Ora 02:14 · Drita e kuqe", "Ora 02:15 · Stop & Go — Hapur", "Ora 02:21 · Rruga kombëtare", "Ora 02:30 · Hapur 24/7"] },
+    en: {
+      hud: ["02:14 · Red light", "02:15 · Stop & Go — Open", "02:21 · National road", "02:30 · Open 24/7"],
+      "nav.loc": "Locations", "nav.open": "Open 24/7", "nav.follow": "Follow us",
+      "s1.h1": '<span class="r">Stop.</span>',
+      "s1.p": "Every journey needs a break.",
+      "s2.h2": '<span class="a" style="display:block;margin-bottom:.32em">Relax.</span>Recharge.',
+      "s2.p": "Coffee, minimarket and snack food.<br>24 hours a day, 7 days a week.",
+      "s3.h1": '<span class="g">Go.</span>',
+      "s3.p": "The light is always on. Stop by whenever you like.",
+      "kafe.eb": "01 · Coffee",
+      "kafe.h2": 'Coffee you enjoy<br><span class="a">every time.</span>',
+      "kafe.p": "At Stop &amp; Go, Ama Caffè is waiting for you.<br>From your favourite espresso to a cappuccino<br>to enjoy during your break.<br>Take it to go, or sit down and savour it slowly.",
+      "kafe.li": "Outdoor seating",
+      "mini.eb": "02 · Minimarket",
+      "mini.h2": 'Everything<span class="r" style="display:block;margin-top:.14em">for the road.</span>',
+      "mini.p": "Whatever you need on your journey, you'll find it here.<br>Cold drinks, snacks and everyday essentials,<br>24 hours a day, 7 days a week.",
+      "mini.ul": "<li>Cold drinks</li><li>Snacks</li><li>Everyday essentials</li><li>24/7</li>",
+      "rv.eb": "What customers say",
+      "rv.h2": 'What travellers<span class="g" style="display:block;margin-top:.3em">are saying.</span>',
+      "rv.tr": "translated from French", "rv.all": "See all ↗", "rv.leave": "Leave a review",
+      "loc.eb": "Always close to you",
+      "loc.h2": '3 stops.<br><span class="g">0 days off.</span>',
+      "loc.open": "Open →",
+      "fin.h2": 'Your next <br class="m-br">stop<br><span class="r">awaits.</span>',
+      "fin.btn": "Find the nearest stop",
+      "fin.hours": "Monday – Sunday · 00:00 – 24:00",
+    },
+    it: {
+      hud: ["02:14 · Semaforo rosso", "02:15 · Stop & Go — Aperto", "02:21 · Strada statale", "02:30 · Aperto 24/7"],
+      "nav.loc": "Sedi", "nav.open": "Aperto 24/7", "nav.follow": "Seguici",
+      "s1.h1": '<span class="r">Fermati.</span>',
+      "s1.p": "Ogni viaggio ha bisogno di una pausa.",
+      "s2.h2": '<span class="a" style="display:block;margin-bottom:.32em">Rilassati.</span>Ricaricati.',
+      "s2.p": "Caffè, minimarket e snack food.<br>24 ore su 24, 7 giorni su 7.",
+      "s3.h1": '<span class="g">Riparti.</span>',
+      "s3.p": "La luce è sempre accesa. Passa quando vuoi.",
+      "kafe.eb": "01 · Caffè",
+      "kafe.h2": 'Un caffè da gustare<br><span class="a">ogni volta.</span>',
+      "kafe.p": "Da Stop &amp; Go ti aspetta Ama Caffè.<br>Dal tuo espresso preferito al cappuccino<br>da gustare durante la tua pausa.<br>Portalo via o siediti e goditelo con calma.",
+      "kafe.li": "Spazio all'aperto",
+      "mini.eb": "02 · Minimarket",
+      "mini.h2": 'Tutto<span class="r" style="display:block;margin-top:.14em">per il viaggio.</span>',
+      "mini.p": "Tutto ciò che ti serve durante il viaggio, lo trovi qui.<br>Bevande fresche, snack e prodotti di uso quotidiano,<br>24 ore su 24, 7 giorni su 7.",
+      "mini.ul": "<li>Bevande fresche</li><li>Snack</li><li>Prodotti quotidiani</li><li>24/7</li>",
+      "rv.eb": "Dicono di noi",
+      "rv.h2": 'Cosa dicono<span class="g" style="display:block;margin-top:.3em">i viaggiatori.</span>',
+      "rv.tr": "tradotto dal francese", "rv.all": "Vedi tutte ↗", "rv.leave": "Lascia una recensione",
+      "loc.eb": "Sempre vicino a te",
+      "loc.h2": '3 sedi.<br><span class="g">Sempre aperte.</span>',
+      "loc.open": "Aperto →",
+      "fin.h2": 'La tua prossima <br class="m-br">tappa<br><span class="r">ti aspetta.</span>',
+      "fin.btn": "Trova la sede più vicina",
+      "fin.hours": "Lunedì – Domenica · 00:00 – 24:00",
+    },
+    de: {
+      hud: ["02:14 · Rote Ampel", "02:15 · Stop & Go — Geöffnet", "02:21 · Nationalstraße", "02:30 · 24/7 geöffnet"],
+      "nav.loc": "Standorte", "nav.open": "24/7 geöffnet", "nav.follow": "Folge uns",
+      "s1.h1": '<span class="r">Halt.</span>',
+      "s1.p": "Jede Reise braucht eine Pause.",
+      "s2.h2": '<span class="a" style="display:block;margin-bottom:.32em">Entspann dich.</span>Tank Energie.',
+      "s2.p": "Kaffee, Minimarkt und Snack Food.<br>24 Stunden am Tag, 7 Tage die Woche.",
+      "s3.h1": '<span class="g">Weiter.</span>',
+      "s3.p": "Das Licht ist immer an. Komm vorbei, wann du willst.",
+      "kafe.eb": "01 · Kaffee",
+      "kafe.h2": 'Kaffee, der<br><span class="a">immer schmeckt.</span>',
+      "kafe.p": "Bei Stop &amp; Go wartet Ama Caffè auf dich.<br>Vom Lieblingsespresso bis zum Cappuccino<br>für deine Pause unterwegs.<br>Zum Mitnehmen oder ganz in Ruhe vor Ort.",
+      "kafe.li": "Außenbereich",
+      "mini.eb": "02 · Minimarkt",
+      "mini.h2": 'Alles<span class="r" style="display:block;margin-top:.14em">für unterwegs.</span>',
+      "mini.p": "Was du auf der Reise brauchst, findest du hier.<br>Kalte Getränke, Snacks und Dinge für den Alltag,<br>24 Stunden am Tag, 7 Tage die Woche.",
+      "mini.ul": "<li>Kalte Getränke</li><li>Snacks</li><li>Alltagsbedarf</li><li>24/7</li>",
+      "rv.eb": "Kundenstimmen",
+      "rv.h2": 'Was Reisende<span class="g" style="display:block;margin-top:.3em">sagen.</span>',
+      "rv.tr": "aus dem Französischen übersetzt", "rv.all": "Alle ansehen ↗", "rv.leave": "Bewertung schreiben",
+      "loc.eb": "Immer in deiner Nähe",
+      "loc.h2": '3 Standorte.<br><span class="g">Immer offen.</span>',
+      "loc.open": "Geöffnet →",
+      "fin.h2": 'Dein nächster <br class="m-br">Stopp<br><span class="r">wartet.</span>',
+      "fin.btn": "Nächsten Standort finden",
+      "fin.hours": "Montag – Sonntag · 00:00 – 24:00",
+    },
+    hr: {
+      hud: ["02:14 · Crveno svjetlo", "02:15 · Stop & Go — Otvoreno", "02:21 · Državna cesta", "02:30 · Otvoreno 0–24"],
+      "nav.loc": "Lokacije", "nav.open": "Otvoreno 0–24", "nav.follow": "Pratite nas",
+      "s1.h1": '<span class="r">Stani.</span>',
+      "s1.p": "Svako putovanje treba predah.",
+      "s2.h2": '<span class="a" style="display:block;margin-bottom:.32em">Opusti se.</span>Napuni baterije.',
+      "s2.p": "Kava, minimarket i snack food.<br>24 sata dnevno, 7 dana u tjednu.",
+      "s3.h1": '<span class="g">Nastavi.</span>',
+      "s3.p": "Svjetlo je uvijek upaljeno. Svrati kad god želiš.",
+      "kafe.eb": "01 · Kava",
+      "kafe.h2": 'Kava u kojoj<br><span class="a">uživaš svaki put.</span>',
+      "kafe.p": "U Stop &amp; Go čeka te Ama Caffè.<br>Od omiljenog espressa do cappuccina<br>u kojem uživaš tijekom pauze.<br>Ponesi je sa sobom ili sjedni i uživaj bez žurbe.",
+      "kafe.li": "Vanjska terasa",
+      "mini.eb": "02 · Minimarket",
+      "mini.h2": 'Sve<span class="r" style="display:block;margin-top:.14em">za put.</span>',
+      "mini.p": "Sve što ti treba na putu, naći ćeš ovdje.<br>Hladna pića, grickalice i proizvodi za svaki dan,<br>24 sata dnevno, 7 dana u tjednu.",
+      "mini.ul": "<li>Hladna pića</li><li>Grickalice</li><li>Svakodnevni proizvodi</li><li>0–24</li>",
+      "rv.eb": "Riječ gostiju",
+      "rv.h2": 'Što kažu<span class="g" style="display:block;margin-top:.3em">putnici.</span>',
+      "rv.tr": "prevedeno s francuskog", "rv.all": "Pogledaj sve ↗", "rv.leave": "Ostavi recenziju",
+      "loc.eb": "Uvijek blizu tebe",
+      "loc.h2": '3 lokacije.<br><span class="g">Uvijek otvoreno.</span>',
+      "loc.open": "Otvoreno →",
+      "fin.h2": 'Tvoja sljedeća <br class="m-br">stanica<br><span class="r">te čeka.</span>',
+      "fin.btn": "Pronađi najbližu lokaciju",
+      "fin.hours": "Ponedjeljak – Nedjelja · 00:00 – 24:00",
+    },
+  };
+  const i18nEls = [...document.querySelectorAll("[data-i18n]")];
+  i18nEls.forEach(e => e.dataset.sq = e.innerHTML);
+  function setLang(lang, save) {
+    if (!I18N[lang]) lang = "sq";
+    i18nEls.forEach(e => { const v = lang === "sq" ? e.dataset.sq : I18N[lang][e.dataset.i18n]; if (v != null) e.innerHTML = v; });
+    document.documentElement.lang = lang;
+    window.HUD = I18N[lang].hud; // read by the 3D loop
+    document.getElementById("hud").textContent = window.HUD[0];
+    document.getElementById("lang-cur").textContent = lang.toUpperCase();
+    document.getElementById("lang-flag").src = "images/flags/" + { sq: "al", en: "gb", it: "it", de: "de", hr: "hr" }[lang] + ".svg";
+    document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-current", b.dataset.lang === lang));
+    if (save) try { localStorage.setItem("sg-lang", lang); } catch (e) {}
+    if (window.ScrollTrigger) ScrollTrigger.refresh(); // card heights changed → re-anchor the 3D scroll
+  }
+  let startLang = new URLSearchParams(location.search).get("lang");
+  if (!startLang) try { startLang = localStorage.getItem("sg-lang"); } catch (e) {}
+  setLang(startLang || "sq");
+
+  // ---------- Navbar dropdowns + mobile sheet ----------
+  const nav = document.getElementById("nav"), burger = nav.querySelector(".burger");
+  function closeNav() {
+    nav.querySelectorAll(".dd.open").forEach(d => { d.classList.remove("open"); d.querySelector(".nav-btn").setAttribute("aria-expanded", "false"); });
+    nav.classList.remove("sheet-open"); burger.setAttribute("aria-expanded", "false");
+  }
+  nav.querySelectorAll(".dd > .nav-btn").forEach(b => b.addEventListener("click", () => {
+    const d = b.parentElement, open = !d.classList.contains("open");
+    closeNav(); d.classList.toggle("open", open); b.setAttribute("aria-expanded", open);
+  }));
+  burger.addEventListener("click", () => {
+    const open = !nav.classList.contains("sheet-open");
+    closeNav(); nav.classList.toggle("sheet-open", open); burger.setAttribute("aria-expanded", open);
+  });
+  nav.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => { setLang(b.dataset.lang, true); closeNav(); }));
+  nav.querySelectorAll(".loc-link").forEach(a => a.addEventListener("click", closeNav));
+  document.addEventListener("click", e => { if (!nav.contains(e.target)) closeNav(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeNav(); });
+</script>
 <script>
   // --kh = coffee card height, lets the sticky card sit at the bottom of the screen on phones
   const kc = document.querySelector(".kafe-card"), setKh = () => document.documentElement.style.setProperty("--kh", kc.offsetHeight + "px");
@@ -860,7 +1118,8 @@ function initScene() {
     const flicker = neonOn < 1 && neonOn > 0 ? (Math.random() > 0.5 ? 1 : 0.1) : 1;
     neonMat.color.setScalar(neonOn * flicker * 2.2); signLight.intensity = neonOn * flicker * 40;
     glass.material.emissiveIntensity = smooth(0.3, 0.36, p) * 0.85; storeLight.intensity = smooth(0.3, 0.36, p) * 30;
-    hud.textContent = p < 0.2 ? 'Ora 02:14 · Drita e kuqe' : p < 0.5 ? 'Ora 02:15 · Stop & Go — Hapur' : p < 0.85 ? 'Ora 02:21 · Rruga kombëtare' : 'Ora 02:30 · Hapur 24/7';
+    const H = window.HUD; // set by the language switcher
+    hud.textContent = p < 0.2 ? H[0] : p < 0.5 ? H[1] : p < 0.85 ? H[2] : H[3];
 
     // ---- Espresso shot on scroll: first drops → twin streams → crema lightens → tail drips → steam ----
     const P0 = 0.47, P1 = 0.49, P2 = 0.6, P3 = 0.62;
