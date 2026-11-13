@@ -3,16 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Stop & Go — Drita Jeshile (demo 3D)</title>
-<meta name="description" content="Stop & Go Albania: kafe, minimarket dhe snack food, hapur 24/7. Demo 3D scrollytelling.">
-<meta property="og:title" content="Stop & Go — Ndalo. Shijo. Vazhdo.">
-<meta property="og:image" content="/images/storefront-1.jpg">
+<title>Stop &amp; Go Albania — Kafe &amp; Minimarket 24/7 | Shkodër</title>
+<meta name="description" content="Stop &amp; Go: kafe Ama Caffè, minimarket dhe snack food, hapur 24/7 në Shkodër, Kryebushat dhe Muriqan. Ndalo, çlodhu dhe vazhdo rrugën.">
+<link rel="canonical" href="https://stopandgo-albania.vercel.app/">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Stop &amp; Go Albania">
+<meta property="og:url" content="https://stopandgo-albania.vercel.app/">
+<meta property="og:title" content="Stop &amp; Go — Ndalo. Çlodhu. Vazhdo.">
+<meta property="og:description" content="Kafe, minimarket dhe snack food, hapur 24/7 në Shkodër, Kryebushat dhe Muriqan.">
+<meta property="og:image" content="https://stopandgo-albania.vercel.app/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Fasada e Stop &amp; Go natën, me tabelën neon">
+<meta property="og:locale" content="sq_AL">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<script type="importmap">
+{"imports":{"three":"/js/vendor/three/three.module.min.js","three/addons/":"/js/vendor/three/addons/"}}
+</script>
+<link rel="modulepreload" href="/js/vendor/three/three.module.min.js">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"CafeOrCoffeeShop","name":"Stop & Go","openingHours":"Mo-Su 00:00-24:00","servesCuisine":"Coffee, Snacks","address":{"@type":"PostalAddress","addressLocality":"Tiranë","addressCountry":"AL"},"geo":{"@type":"GeoCoordinates","latitude":41.3275,"longitude":19.8187}}
+{"@context":"https://schema.org","@graph":[
+{"@type":"Organization","@id":"https://stopandgo-albania.vercel.app/#org","name":"Stop & Go Albania","url":"https://stopandgo-albania.vercel.app/","logo":"https://stopandgo-albania.vercel.app/images/stopandgo-albania_logo.png","sameAs":["https://www.instagram.com/stop_and_go_shkoder/","https://www.facebook.com/people/StopGo-Shkoder/61591744741629/","https://www.tiktok.com/@stop_and_go_shkoder"]},
+{"@type":["CafeOrCoffeeShop","ConvenienceStore"],"@id":"https://stopandgo-albania.vercel.app/#kryebushat","name":"Stop&Go Kryebushat","parentOrganization":{"@id":"https://stopandgo-albania.vercel.app/#org"},"url":"https://stopandgo-albania.vercel.app/","image":"https://stopandgo-albania.vercel.app/images/og-image.jpg","servesCuisine":["Coffee","Snacks"],"address":{"@type":"PostalAddress","addressLocality":"Kryebushat","addressRegion":"Shkodër","addressCountry":"AL"},"hasMap":"https://www.google.com/maps/search/?api=1&query=Stop%26Go+Kryebushat","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}},
+{"@type":["CafeOrCoffeeShop","ConvenienceStore"],"@id":"https://stopandgo-albania.vercel.app/#shkoder","name":"Stop&Go Shkodër","parentOrganization":{"@id":"https://stopandgo-albania.vercel.app/#org"},"url":"https://stopandgo-albania.vercel.app/","image":"https://stopandgo-albania.vercel.app/images/og-image.jpg","servesCuisine":["Coffee","Snacks"],"address":{"@type":"PostalAddress","addressLocality":"Shkodër","addressRegion":"Shkodër","addressCountry":"AL"},"geo":{"@type":"GeoCoordinates","latitude":42.0750554,"longitude":19.5238237},"hasMap":"https://www.google.com/maps/place/Stop%26Go+Shkoder/@42.0750554,19.5238237,837m/data=!3m2!1e3!4b1!4m6!3m5!1s0x134e01631231dc3d:0x5206ac3b9daadf41!8m2!3d42.0750554!4d19.5238237!16s%2Fg%2F11nvz7jj9s","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}},
+{"@type":["CafeOrCoffeeShop","ConvenienceStore"],"@id":"https://stopandgo-albania.vercel.app/#muriqan","name":"Stop&Go Muriqan","parentOrganization":{"@id":"https://stopandgo-albania.vercel.app/#org"},"url":"https://stopandgo-albania.vercel.app/","image":"https://stopandgo-albania.vercel.app/images/og-image.jpg","servesCuisine":["Coffee","Snacks"],"address":{"@type":"PostalAddress","addressLocality":"Muriqan","addressRegion":"Shkodër","addressCountry":"AL"},"hasMap":"https://www.google.com/maps/search/?api=1&query=Stop%26Go+Muriqan","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}
+]}
 </script>
 <link rel="stylesheet" href="/css/style.css">
+<noscript><style>#gl{display:none}.logo-sec{display:none}body{background:linear-gradient(#07070acc,#07070a),url(/images/storefront-1.webp) center/cover fixed}</style></noscript>
 </head>
 <body>
 <canvas id="gl" aria-hidden="true"></canvas>
@@ -21,8 +47,8 @@
 <div class="hud" id="hud">Ora 02:14 · Rruga kombëtare</div>
 
 <header class="nav" id="nav">
-  <a class="nav-logo" href="#" aria-label="Stop &amp; Go Albania"><img src="images/stopandgo-albania_logo.png" alt="Stop &amp; Go" width="66" height="30"></a>
-  <nav class="nav-main" aria-label="Main">
+  <a class="nav-logo" href="#" aria-label="Stop &amp; Go Albania"><img src="/images/logo-nav.webp" alt="Stop &amp; Go" width="66" height="30"></a>
+  <nav class="nav-main" aria-label="Menyja kryesore" data-i18n-label="a11y.nav">
     <div class="dd">
       <button type="button" class="nav-btn" aria-expanded="false" aria-controls="loc-panel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
@@ -37,27 +63,27 @@
     </div>
     <span class="nav-sep" aria-hidden="true"></span>
     <div class="soc">
-      <a data-soc="instagram" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-      <a data-soc="facebook" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3z"/></svg></a>
-      <a data-soc="tiktok" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.3 2.2 1.6 3.6 3.9 3.8v2.6c-1.4.1-2.6-.3-3.9-1.1v5.3c0 6.6-7.2 8.7-10.1 4-1.9-3-.7-8.4 5.5-8.6v2.8c-.5.1-1 .2-1.4.4-1.4.5-2.2 1.4-2 3 .4 3.1 6.1 4 5.6-2.1V3h2.4z"/></svg></a>
+      <a href="https://www.instagram.com/stop_and_go_shkoder/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://www.facebook.com/people/StopGo-Shkoder/61591744741629/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3z"/></svg></a>
+      <a href="https://www.tiktok.com/@stop_and_go_shkoder" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.3 2.2 1.6 3.6 3.9 3.8v2.6c-1.4.1-2.6-.3-3.9-1.1v5.3c0 6.6-7.2 8.7-10.1 4-1.9-3-.7-8.4 5.5-8.6v2.8c-.5.1-1 .2-1.4.4-1.4.5-2.2 1.4-2 3 .4 3.1 6.1 4 5.6-2.1V3h2.4z"/></svg></a>
     </div>
     <span class="nav-sep" aria-hidden="true"></span>
   </nav>
   <div class="dd">
-    <button type="button" class="nav-btn lang-btn" aria-expanded="false" aria-controls="lang-panel" aria-label="Language">
-      <img class="flag" id="lang-flag" src="images/flags/al.svg" alt="" width="22" height="16">
+    <button type="button" class="nav-btn lang-btn" aria-expanded="false" aria-controls="lang-panel" aria-label="Gjuha" data-i18n-label="a11y.lang">
+      <img class="flag" id="lang-flag" src="/images/flags/al.svg" alt="" width="22" height="16">
       <span id="lang-cur">SQ</span>
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
     </button>
     <div class="dd-panel lang-panel" id="lang-panel">
-      <button type="button" data-lang="sq"><img class="flag" src="images/flags/al.svg" alt="" width="22" height="16">Shqip<span class="lc">SQ</span></button>
-      <button type="button" data-lang="en"><img class="flag" src="images/flags/gb.svg" alt="" width="22" height="16">English<span class="lc">EN</span></button>
-      <button type="button" data-lang="it"><img class="flag" src="images/flags/it.svg" alt="" width="22" height="16">Italiano<span class="lc">IT</span></button>
-      <button type="button" data-lang="de"><img class="flag" src="images/flags/de.svg" alt="" width="22" height="16">Deutsch<span class="lc">DE</span></button>
-      <button type="button" data-lang="hr"><img class="flag" src="images/flags/hr.svg" alt="" width="22" height="16">Hrvatski<span class="lc">HR</span></button>
+      <button type="button" data-lang="sq"><img class="flag" src="/images/flags/al.svg" alt="" width="22" height="16">Shqip<span class="lc">SQ</span></button>
+      <button type="button" data-lang="en"><img class="flag" src="/images/flags/gb.svg" alt="" width="22" height="16">English<span class="lc">EN</span></button>
+      <button type="button" data-lang="it"><img class="flag" src="/images/flags/it.svg" alt="" width="22" height="16">Italiano<span class="lc">IT</span></button>
+      <button type="button" data-lang="de"><img class="flag" src="/images/flags/de.svg" alt="" width="22" height="16">Deutsch<span class="lc">DE</span></button>
+      <button type="button" data-lang="hr"><img class="flag" src="/images/flags/hr.svg" alt="" width="22" height="16">Hrvatski<span class="lc">HR</span></button>
     </div>
   </div>
-  <button type="button" class="burger" aria-expanded="false" aria-controls="nav-sheet" aria-label="Menu"><span></span><span></span></button>
+  <button type="button" class="burger" aria-expanded="false" aria-controls="nav-sheet" aria-label="Menyja" data-i18n-label="a11y.menu"><span></span><span></span></button>
   <div class="nav-sheet" id="nav-sheet">
     <p class="sheet-h" data-i18n="nav.loc">Lokacionet</p>
     <a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Kryebushat" target="_blank" rel="noopener"><span class="loc-dot"></span><span>Kryebushat<span class="loc-meta" data-i18n="nav.open">Hapur 24/7</span></span><span class="ar">↗</span></a>
@@ -65,9 +91,9 @@
     <a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Muriqan" target="_blank" rel="noopener"><span class="loc-dot"></span><span>Muriqan<span class="loc-meta" data-i18n="nav.open">Hapur 24/7</span></span><span class="ar">↗</span></a>
     <p class="sheet-h" data-i18n="nav.follow">Na ndiq</p>
     <div class="sheet-soc">
-      <a data-soc="instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
-      <a data-soc="facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3z"/></svg>Facebook</a>
-      <a data-soc="tiktok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.3 2.2 1.6 3.6 3.9 3.8v2.6c-1.4.1-2.6-.3-3.9-1.1v5.3c0 6.6-7.2 8.7-10.1 4-1.9-3-.7-8.4 5.5-8.6v2.8c-.5.1-1 .2-1.4.4-1.4.5-2.2 1.4-2 3 .4 3.1 6.1 4 5.6-2.1V3h2.4z"/></svg>TikTok</a>
+      <a href="https://www.instagram.com/stop_and_go_shkoder/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+      <a href="https://www.facebook.com/people/StopGo-Shkoder/61591744741629/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3z"/></svg>Facebook</a>
+      <a href="https://www.tiktok.com/@stop_and_go_shkoder" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.3 2.2 1.6 3.6 3.9 3.8v2.6c-1.4.1-2.6-.3-3.9-1.1v5.3c0 6.6-7.2 8.7-10.1 4-1.9-3-.7-8.4 5.5-8.6v2.8c-.5.1-1 .2-1.4.4-1.4.5-2.2 1.4-2 3 .4 3.1 6.1 4 5.6-2.1V3h2.4z"/></svg>TikTok</a>
     </div>
   </div>
 </header>
@@ -76,7 +102,7 @@
   <section class="center" data-s>
     <div class="card">
       <div class="eyebrow">Stop &amp; Go · Albania · 24/7</div>
-      <h1 data-i18n="s1.h1"><span class="r">Ndalo.</span></h1>
+      <h1><span class="vh" data-i18n="s1.sr">Stop &amp; Go Albania: kafe, minimarket dhe snack food, hapur 24/7. </span><span data-i18n="s1.h1"><span class="r">Ndalo.</span></span></h1>
       <p class="lead" data-i18n="s1.p">Çdo udhëtim ka nevojë për një pushim.</p>
     </div>
   </section>
@@ -88,7 +114,7 @@
   </section>
   <section class="center" data-s>
     <div class="card">
-      <h1 data-i18n="s3.h1"><span class="g">Vazhdo.</span></h1>
+      <h2 class="h1" data-i18n="s3.h1"><span class="g">Vazhdo.</span></h2>
       <p data-i18n="s3.p">Drita është gjithmonë ndezur. Kalo kur të duash.</p>
     </div>
   </section>
@@ -113,15 +139,15 @@
       <div class="eyebrow" data-i18n="rv.eb">Fjala e klientëve</div>
       <h2 data-i18n="rv.h2">Çfarë thonë<span class="g" style="display:block;margin-top:.3em">udhëtarët.</span></h2>
       <div class="quotes">
-        <blockquote>“Great coffee! Really nice people working here.”<cite>Almir C. <b>★★★★★</b></cite></blockquote>
-        <blockquote>“Perfect place to stop for coffee etc during your trip and you can pay in euros.”<cite>Dimitris D. <b>★★★★★</b></cite></blockquote>
-        <blockquote>“Perfect place to rest during a long trip.<br class="d-br"> Very reasonable prices and very clean environment.”<cite>Xhulio K. <b>★★★★★</b></cite></blockquote>
-        <blockquote>“Perfect spots for a quick coffee break.<br class="d-br"> The place is clean and welcoming, and the waitress is very friendly.”<cite><span>Christophe R. · <span data-i18n="rv.tr">përkthyer nga frëngjishtja</span></span> <b>★★★★★</b></cite></blockquote>
-        <blockquote>“Everything you need to rest and recharge with energy!”<cite>Robert C. <b>★★★★★</b></cite></blockquote>
-        <blockquote>“Everything is perfect.<br class="d-br"> Staff is very kind and helpful if you ask for any trip or road advice.<br class="d-br"> Food is perfect and it's a very clean coffee shop.<br class="d-br"> Worth to try it.”<cite>The Old Man <b>★★★★★</b></cite></blockquote>
+        <blockquote>“Great coffee! Really nice people working here.”<cite>Almir C. <b role="img" aria-label="5/5">★★★★★</b></cite></blockquote>
+        <blockquote>“Perfect place to stop for coffee etc during your trip and you can pay in euros.”<cite>Dimitris D. <b role="img" aria-label="5/5">★★★★★</b></cite></blockquote>
+        <blockquote>“Perfect place to rest during a long trip.<br class="d-br"> Very reasonable prices and very clean environment.”<cite>Xhulio K. <b role="img" aria-label="5/5">★★★★★</b></cite></blockquote>
+        <blockquote>“Perfect spots for a quick coffee break.<br class="d-br"> The place is clean and welcoming, and the waitress is very friendly.”<cite><span>Christophe R. · <span data-i18n="rv.tr">përkthyer nga frëngjishtja</span></span> <b role="img" aria-label="5/5">★★★★★</b></cite></blockquote>
+        <blockquote>“Everything you need to rest and recharge with energy!”<cite>Robert C. <b role="img" aria-label="5/5">★★★★★</b></cite></blockquote>
+        <blockquote>“Everything is perfect.<br class="d-br"> Staff is very kind and helpful if you ask for any trip or road advice.<br class="d-br"> Food is perfect and it's a very clean coffee shop.<br class="d-br"> Worth to try it.”<cite>The Old Man <b role="img" aria-label="5/5">★★★★★</b></cite></blockquote>
       </div>
       <div class="rv-cta">
-        <span class="rv-stars">★★★★★<small>Google Maps</small></span>
+        <span class="rv-stars"><span role="img" aria-label="5/5">★★★★★</span><small>Google Maps</small></span>
         <span class="rv-lbl" data-i18n="rv.leave">Lër një vlerësim</span>
         <div class="rv-locs">
           <a class="rv-btn go" href="https://www.google.com/maps/search/?api=1&amp;query=Stop%26Go+Kryebushat" target="_blank" rel="noopener">Kryebushat</a>
@@ -131,7 +157,7 @@
       </div>
     </div>
   </section>
-  <section data-s>
+  <section id="lokacionet" data-s>
     <div class="card">
       <div class="eyebrow" data-i18n="loc.eb">Gjithmonë afër teje</div>
       <h2 data-i18n="loc.h2">3 ndalesa.<br><span class="g">0 pritje.</span></h2>
@@ -145,7 +171,7 @@
   <section class="center final-sec" data-s>
     <div class="card">
       <h2 data-i18n="fin.h2">Ndalesa jote <br class="m-br">e radhës<br><span class="r">të pret.</span></h2>
-      <a class="btn go" href="https://www.google.com/maps/search/?api=1&query=Stop%26Go+Albania" target="_blank" rel="noopener" data-i18n="fin.btn">Gjej ndalesën më të afërt</a>
+      <a class="btn go" id="cta-near" href="https://www.google.com/maps/search/Stop%26Go/@42.03,19.52,11z" target="_blank" rel="noopener" data-i18n="fin.btn">Gjej ndalesën më të afërt</a>
       <p style="font-size:13px;color:var(--muted)" data-i18n="fin.hours">E hënë – E diel · 00:00 – 24:00</p>
     </div>
   </section>
@@ -153,11 +179,11 @@
 </main>
 
 <footer class="site-foot">
-  <p class="copy">© 2026 Stop &amp; Go Albania</p>
+  <p class="copy">© <span id="yr">2026</span> Stop &amp; Go Albania</p>
   <div class="ip-sig">
     <span class="ip-line" aria-hidden="true"></span>
     <a class="ip-pill" href="https://illyrianpixel.com" target="_blank" rel="noopener">
-      <span class="ip-medal"><img src="images/illyrianpixel_logo.svg" alt="" width="26" height="24"></span>
+      <span class="ip-medal"><img src="/images/illyrianpixel_logo.svg" alt="" width="26" height="24"></span>
       <span class="ip-txt">
         <span class="ip-by">Designed &amp; Developed by</span>
         <span class="ip-name">Illyrian <em>Pixel</em></span>
@@ -167,15 +193,13 @@
     <span class="ip-line r" aria-hidden="true"></span>
   </div>
 </footer>
+<script src="/js/vendor/gsap.min.js"></script>
+<script src="/js/vendor/ScrollTrigger.min.js"></script>
+<script src="/js/vendor/lenis.min.js"></script>
+<script src="/js/i18n.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/layout.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-<script type="importmap">
-{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
-</script>
+<script src="/js/anim.js"></script>
 <script type="module" src="/js/scene.js"></script>
 </body>
 </html>

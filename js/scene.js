@@ -6,31 +6,21 @@ import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 
-gsap.registerPlugin(ScrollTrigger);
-
-// Text cards fade in per section (also runs in static mode)
-const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Smooth scroll and the text card reveals live in anim.js; it also sets html.static
+// (reduced motion / no WebGL2), in which case the page is a static poster and no 3D is built.
+window.__scene = true; // modules loaded (anim.js falls back to the static poster if this never happens)
 const canvas = document.getElementById('gl');
-const hasGL = !!canvas.getContext('webgl2');
-if (reduced || !hasGL) document.documentElement.classList.add('static');
+const root = document.documentElement;
 
-if (!reduced) {
-  const lenis = new Lenis({ lerp: 0.08 });
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add(t => lenis.raf(t * 1000));
-  gsap.ticker.lagSmoothing(0);
-  // phones: cards sit at the bottom of the screen, so they must be fully in a bit earlier; the first card shows on load
-  const phone = matchMedia('(max-width:700px)').matches;
-  document.querySelectorAll('[data-s] .card').forEach((c, i) => i === 0
-    ? gsap.to(c, { opacity: 1, y: 0, duration: 1.2, delay: 0.3, ease: 'power2.out' })
-    : gsap.to(c, { opacity: 1, y: 0, ease: 'none',
-      scrollTrigger: { trigger: c, start: phone ? 'top 98%' : 'top 85%', end: phone ? 'top 72%' : 'top 45%', scrub: true } }));
-  // coffee card is sticky: fade it out as soon as the camera leaves the cup, so the next text takes over
-  gsap.fromTo('#kafe .card', { opacity: 1, y: 0 }, { opacity: 0, y: -40, ease: 'none', immediateRender: false,
-    scrollTrigger: { trigger: '#kafe', start: 'bottom 120%', end: 'bottom 102%', scrub: true } });
+// Fall back to the static poster (e.g. the GPU dropped the WebGL context)
+function toStatic() {
+  root.classList.add('static');
+  if (window.ScrollTrigger) ScrollTrigger.refresh(); // .logo-sec collapses in static mode
 }
 
-if (!reduced && hasGL) initScene();
+if (!root.classList.contains('static') && window.gsap && window.ScrollTrigger) {
+  try { initScene(); } catch (e) { console.error(e); toStatic(); }
+}
 
 function initScene() {
   // Adaptive quality: cheap heuristic in place of a GPU tier lib
@@ -109,7 +99,11 @@ function initScene() {
   }
   const neonMat = new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false, color: 0x000000 });
   const texLoader = new THREE.TextureLoader();
-  texLoader.load('images/stopandgo-albania_logo.png', t => { t.colorSpace = THREE.SRGBColorSpace; neonMat.map = t; neonMat.needsUpdate = true; });
+  // each image is loaded once and shared: the big neon sign + the mini stores' signs / the store glass + the mini stores' windows
+  const logoTex = texLoader.load('/images/stopandgo-albania_logo.png', t => { t.colorSpace = THREE.SRGBColorSpace; neonMat.map = t; neonMat.needsUpdate = true; });
+  // real interior photo through the glass: crop the window band (y≈425–822 of 992px) so it fits the window planes
+  const photoTex = texLoader.load('/images/storefront-1.webp', t => { t.colorSpace = THREE.SRGBColorSpace; glass.material.emissiveMap = t; glass.material.needsUpdate = true; });
+  photoTex.repeat.set(1, 397 / 992); photoTex.offset.set(0, (992 - 822) / 992);
   const sign = new THREE.Mesh(new THREE.PlaneGeometry(10, 4.53), neonMat); // logo aspect 733×332
   sign.position.set(0, 9, -62); scene.add(sign);
   const signLight = new THREE.PointLight(0xff3150, 0, 30, 1.5); signLight.position.set(0, 8, -59); scene.add(signLight);
@@ -120,12 +114,6 @@ function initScene() {
   wall.position.y = 3.25; store.add(wall);
   const glass = new THREE.Mesh(new THREE.PlaneGeometry(14, 4.2), new THREE.MeshStandardMaterial({ color: 0x000000, emissive: 0xffffff, emissiveIntensity: 0 }));
   glass.position.set(0, 2.3, 4.01); store.add(glass);
-  // real interior photo through the glass: crop the window band (y≈425–822 of 992px) so it fits the 14×4.2 plane
-  texLoader.load('images/storefront-1.jpg', t => {
-    t.colorSpace = THREE.SRGBColorSpace;
-    t.repeat.set(1, 397 / 992); t.offset.set(0, (992 - 822) / 992);
-    glass.material.emissiveMap = t; glass.material.needsUpdate = true;
-  });
   const canopy = new THREE.Mesh(new THREE.BoxGeometry(20, 0.3, 4), new THREE.MeshStandardMaterial({ color: 0x0d0d10 }));
   canopy.position.set(0, 5, 5.5); store.add(canopy);
   const stripe = new THREE.Mesh(new THREE.BoxGeometry(20, 0.08, 0.05), new THREE.MeshBasicMaterial({ color: 0x3ddc5f, toneMapped: false }));
@@ -232,7 +220,7 @@ function initScene() {
   const aniso = renderer.capabilities.getMaxAnisotropy();
   const redraws = [];
   function labelTex(w, h, draw) {
-    const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d');
+    const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d', { willReadFrequently: true }); // noise() reads pixels back
     const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = aniso;
     const run = () => { g.clearRect(0, 0, w, h); draw(g, w, h); t.needsUpdate = true; };
     run(); redraws.push(run); return t;
@@ -441,9 +429,6 @@ function initScene() {
   // ---------- The 3 stops: miniature Stop & Go stores along the roadside, each with a pin + city label ----------
   // Near → far: Kryebushat, Shkodër, Muriqan (same order as the list in the card)
   const STOP_CAM = new THREE.Vector3(-3, 6.5, -160); // matches the 0.88 keyframe, stores turn to face it
-  const photoTex = texLoader.load('images/storefront-1.jpg', t => { t.colorSpace = THREE.SRGBColorSpace; });
-  photoTex.repeat.set(1, 397 / 992); photoTex.offset.set(0, (992 - 822) / 992);
-  const logoTex = texLoader.load('images/stopandgo-albania_logo.png', t => { t.colorSpace = THREE.SRGBColorSpace; });
   const slatTex = labelTex(512, 64, (g, w, h) => { // wooden slat fascia with the warm LED dots from the real store
     g.fillStyle = '#4a2f1c'; g.fillRect(0, 0, w, h);
     for (let x = 0; x < w; x += 8) { g.fillStyle = x % 16 ? '#5c3b23' : '#3a2415'; g.fillRect(x, 0, 6, h); }
@@ -596,8 +581,14 @@ function initScene() {
   const bar = document.getElementById('bar'), hud = document.getElementById('hud');
 
   const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
-  const look = new THREE.Vector3(); let sp_ = 0; let running = true;
-  document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) tick(); });
+  const look = new THREE.Vector3(); let sp_ = state.p;
+  // one render loop at a time: stop it while the tab is hidden, restart it (once) when it comes back
+  let raf = 0, lost = false;
+  const start = () => { if (!raf && !lost) raf = requestAnimationFrame(tick); };
+  const stop = () => { cancelAnimationFrame(raf); raf = 0; };
+  document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+  // the GPU can drop the context (driver reset, too many tabs on a phone): show the static poster instead of a black canvas
+  canvas.addEventListener('webglcontextlost', () => { lost = true; stop(); toStatic(); });
 
   function resize() {
     const w = innerWidth, h = innerHeight;
@@ -607,11 +598,13 @@ function initScene() {
   }
   addEventListener('resize', resize); resize();
 
-  const clock = new THREE.Clock();
+  const clock = new THREE.Clock(); let lastT = 0;
   function tick() {
-    if (!running) return;
+    raf = 0;
     const t = clock.getElapsedTime();
-    sp_ += (state.p - sp_) * 0.08; // extra damping → weighted camera
+    // frame time in 60fps units, so 120Hz screens don't move twice as fast (clamped after a hidden tab / hiccup)
+    const f = Math.min(t - lastT, 0.1) * 60; lastT = t;
+    sp_ += (state.p - sp_) * (1 - Math.pow(1 - 0.08, f)); // extra damping → weighted camera
     const p = sp_;
     bar.style.width = p * 100 + '%';
 
@@ -717,12 +710,12 @@ function initScene() {
 
     // Rain follows the camera
     for (let i = 0; i < RAIN; i++) {
-      let y = rp[i * 3 + 1] - 0.35; if (y < 0) y += 20; rp[i * 3 + 1] = y;
+      let y = rp[i * 3 + 1] - 0.35 * f; if (y < 0) y += 20; rp[i * 3 + 1] = y;
     }
     rg.attributes.position.needsUpdate = true; rain.position.set(camera.position.x, 0, camera.position.z - 10);
 
     composer.render();
-    requestAnimationFrame(tick);
+    if (!document.hidden) start();
   }
-  tick();
+  start();
 }

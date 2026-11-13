@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — Stop &amp; Go Albania</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/icons/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070a;--text:#f4f1ea;--muted:#a39f97;--red:#ff3150;--green:#3ddc5f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:24px 16px;text-align:center;color:var(--text);font-family:Inter,system-ui,sans-serif;
+  background:linear-gradient(#07070add,#07070a),url(/images/storefront-1.webp) center/cover fixed;background-color:var(--bg)}
+img{height:44px;width:auto;margin:0 auto 36px;display:block}
+h1{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:1;font-size:clamp(84px,22vw,200px);color:var(--red);text-shadow:0 0 30px var(--red)}
+h2{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(26px,6vw,44px);margin-top:12px}
+p{margin-top:14px;color:#d8d4cc;line-height:1.6}
+a.btn{display:inline-block;margin-top:30px;padding:15px 28px;border-radius:99px;background:#1f9e3d;color:#fff;text-decoration:none;font-weight:600;box-shadow:0 0 40px #3ddc5f88}
+a.btn:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+</style>
+</head>
+<body>
+<main>
+  <img src="/images/logo-nav.webp" alt="Stop &amp; Go" width="97" height="44">
+  <h1>404</h1>
+  <h2 id="t">Rruga e gabuar.</h2>
+  <p id="p">Kjo faqe nuk ekziston, por drita jeshile është gjithmonë ndezur.</p>
+  <a class="btn" id="b" href="/">Kthehu në rrugë</a>
+</main>
+<script>
+// pick the visitor's language (saved choice from the main site, else the browser's)
+(function () {
+  var T = {
+    en: ["Wrong turn.", "This page doesn't exist, but the green light is always on.", "Back on the road", "/en"],
+    it: ["Strada sbagliata.", "Questa pagina non esiste, ma il verde è sempre acceso.", "Torna in strada", "/it"],
+    de: ["Falsch abgebogen.", "Diese Seite gibt es nicht, aber die Ampel steht immer auf Grün.", "Zurück auf die Straße", "/de"],
+    hr: ["Pogrešan smjer.", "Ova stranica ne postoji, ali zeleno svjetlo uvijek gori.", "Natrag na cestu", "/hr"]
+  }, l = null;
+  try { l = localStorage.getItem("sg-lang"); } catch (e) {}
+  l = l || (navigator.language || "").slice(0, 2);
+  var v = T[l]; if (!v) return;
+  document.documentElement.lang = l;
+  document.getElementById("t").textContent = v[0];
+  document.getElementById("p").textContent = v[1];
+  var b = document.getElementById("b"); b.textContent = v[2]; b.href = v[3];
+})();
+</script>
+</body>
+</html>
