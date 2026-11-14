@@ -1,10 +1,10 @@
 // ---------- Locations: used by the "nearest stop" button ----------
-// lat/lng: fill in once the exact spots are confirmed. Until every location has coordinates the button
-// simply opens a Google Maps search for "Stop&Go" centred on the Shkodër region (its href in index.html).
+// The "nearest stop" button picks the closest of these by GPS; if location access is denied it falls back
+// to a Google Maps search for "Stop&Go" centred on the Shkodër region (its href in index.html).
 const LOCATIONS = [
-  { name: "Kryebushat", lat: null, lng: null, url: "https://www.google.com/maps/search/?api=1&query=Stop%26Go+Kryebushat" },
+  { name: "Kryebushat", lat: 41.9900417, lng: 19.535705, url: "https://www.google.com/maps/place/Stop%26Go+Kryebushat/@41.9900417,19.535705,148m/data=!3m1!1e3!4m6!3m5!1s0x134e03005601c457:0x1c71666028eb07e3!8m2!3d41.9900417!4d19.535705!16s%2Fg%2F11xl4nx4m1" },
   { name: "Shkodër", lat: 42.0750554, lng: 19.5238237, url: "https://www.google.com/maps/place/Stop%26Go+Shkoder/@42.0750554,19.5238237,837m/data=!3m2!1e3!4b1!4m6!3m5!1s0x134e01631231dc3d:0x5206ac3b9daadf41!8m2!3d42.0750554!4d19.5238237!16s%2Fg%2F11nvz7jj9s" },
-  { name: "Muriqan", lat: null, lng: null, url: "https://www.google.com/maps/search/?api=1&query=Stop%26Go+Muriqan" },
+  { name: "Muriqan", lat: 42.019046, lng: 19.376608, url: "https://www.google.com/maps/place/Stop%26Go+Muriqan/@42.019046,19.376608,17z/data=!4m6!3m5!1s0x134e0f40e1311327:0x495f7aac395eea82!8m2!3d42.019046!4d19.376608" },
 ];
 
 // ---------- Language: each language has its own pre-rendered URL (/, /en, /it, /de, /hr — see build.mjs) ----------
